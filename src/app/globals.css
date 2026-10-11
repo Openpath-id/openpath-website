@@ -7,6 +7,7 @@
 
 @theme inline {
   --font-Sora: var(--font-Sora);
+  --font-Inter: var(--font-Inter);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 }

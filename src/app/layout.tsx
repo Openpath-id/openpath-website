@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Sora } from "@/lib/font";
+import { Inter, Sora } from "@/lib/font";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -11,8 +10,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={cn(Sora.variable)}>
-      <body className={cn(Sora.variable)}>{children}</body>
+    <html lang="en" className={cn(Sora.variable, Inter.variable)}>
+      <body className={cn(Sora.variable, Inter.variable)}>{children}</body>
     </html>
   );
 }
