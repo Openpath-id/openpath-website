@@ -1,38 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Typography from "@/components/Typography";
-
-const SOCIAL_LINKS = [
-  {
-    name: "Instagram",
-    href: "/",
-    icon: "/images/footer/brand-instagram.svg",
-  },
-  {
-    name: "WhatsApp",
-    href: "/",
-    icon: "/images/footer/brand-whatsapp.svg",
-  },
-  {
-    name: "LinkedIn",
-    href: "/",
-    icon: "/images/footer/brand-linkedin.svg",
-  },
-  {
-    name: "Email",
-    href: "/",
-    icon: "/images/footer/mail.svg",
-  },
-];
-
-const PLATFORM_LINKS = [
-  { label: "Listing Beasiswa & Sertifikasi", href: "/" },
-  { label: "Deadline Terdekat", href: "/" },
-  { label: "Cerita Aplikan", href: "/" },
-  { label: "Peer Mentoring", href: "/" },
-];
-
-const COMPANY_LINKS = [{ label: "Tentang Kami", href: "/" }];
+import { SOCIAL_LINKS, PLATFORM_LINKS, COMPANY_LINKS } from "@/data/navigation";
 
 export default function Footer() {
   return (

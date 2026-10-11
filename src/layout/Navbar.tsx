@@ -5,13 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { ArrowLeft, Menu } from "lucide-react";
 import Typography from "@/components/Typography";
-
-const NAV_ITEMS = [
-  { label: "Home", href: "/" },
-  { label: "Listing", href: "/listing" },
-  { label: "Cerita Aplikan", href: "/cerita-aplikan" },
-  { label: "Peer Mentoring", href: "/peer-mentoring" },
-];
+import { NAV_ITEMS } from "@/data/navigation";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
