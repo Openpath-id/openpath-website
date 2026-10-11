@@ -21,11 +21,11 @@ export default function Navbar() {
       {/* Top Navbar */}
       <nav
         aria-label="Main Navigation"
-        className="w-full h-auto md:h-[90px] px-6 py-[15px] md:px-[90px] md:py-[20px] flex items-center justify-between transition-colors bg-gradient-to-r from-[#14251F] to-[#115C3A] from-[-7.78%] to-[100%]"
+        className="w-full h-auto lg:h-[90px] px-6 py-[15px] lg:px-[90px] lg:py-[20px] flex items-center justify-between transition-colors bg-gradient-to-r from-[#14251F] to-[#115C3A] from-[-7.78%] to-[100%]"
       >
         {/* Left: Brand Logo & Title */}
-        <Link href="/" className="flex items-center gap-2 md:gap-[10px]">
-          <div className="relative w-10 h-10 md:w-[50px] md:h-[50px] shrink-0">
+        <Link href="/" className="flex items-center gap-2 lg:gap-[10px]">
+          <div className="relative w-10 h-10 lg:w-[50px] lg:h-[50px] shrink-0">
             <Image
               src="/images/logo-openpath.svg"
               alt="Openpath Logo"
@@ -37,14 +37,14 @@ export default function Navbar() {
           <Typography
             font="Sora"
             weight="bold"
-            className="text-white text-[16px] md:text-[24px] leading-tight"
+            className="text-white text-[16px] lg:text-[24px] leading-tight"
           >
             Openpath.id
           </Typography>
         </Link>
 
         {/* Right: Desktop Navigation Menu */}
-        <div className="hidden md:flex items-center gap-[40px]">
+        <div className="hidden lg:flex items-center gap-[40px]">
           {NAV_ITEMS.map((item) => (
             <Link key={item.label} href={item.href}>
               <Typography
@@ -62,7 +62,7 @@ export default function Navbar() {
         <button
           type="button"
           onClick={() => setIsOpen(true)}
-          className="flex md:hidden items-center justify-center text-white focus:outline-none"
+          className="flex lg:hidden items-center justify-center text-white focus:outline-none"
           aria-label="Open mobile menu"
           id="mobile-menu-trigger"
         >
@@ -75,7 +75,7 @@ export default function Navbar() {
         role="dialog"
         aria-modal="true"
         aria-hidden={!isOpen}
-        className={`fixed inset-0 z-50 flex flex-col items-center justify-between px-[72px] py-[86px] overflow-y-auto md:hidden bg-gradient-to-r from-[#14251F] to-[#115C3A] from-[-7.78%] to-[100%] transition-all duration-300 ease-in-out ${
+        className={`fixed inset-0 z-50 flex flex-col items-center justify-between px-[72px] py-[86px] overflow-y-auto lg:hidden bg-gradient-to-r from-[#14251F] to-[#115C3A] from-[-7.78%] to-[100%] transition-all duration-300 ease-in-out ${
           isOpen
             ? "opacity-100 translate-y-0 pointer-events-auto visible"
             : "opacity-0 -translate-y-4 pointer-events-none invisible"
