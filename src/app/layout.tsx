@@ -3,6 +3,7 @@ import "./globals.css";
 import { Inter, Sora } from "@/lib/font";
 import { cn } from "@/lib/utils";
 import Navbar from "@/layout/Navbar";
+import Footer from "@/layout/Footer";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -14,7 +15,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={cn(Sora.variable, Inter.variable)}>
       <body className={cn(Sora.variable, Inter.variable, "min-h-screen flex flex-col")}>
         <Navbar />
-        {children}
+        <div className="flex-1 flex flex-col">{children}</div>
+        <Footer />
       </body>
     </html>
   );
