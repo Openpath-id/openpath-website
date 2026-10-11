@@ -155,6 +155,93 @@ export default function Hero() {
           </div>
         </div>
       </section>
+
+      {/* Section 3: Lahir dari PLP YLI 2026 */}
+      <section className="relative w-full bg-gradient-to-r from-[#14251F] to-[#115C3A] from-[-7.78%] to-[100%] overflow-hidden flex flex-col items-center justify-center">
+        {/* Desktop Layout (lg+) */}
+        <div className="hidden lg:flex w-full px-12 xl:px-[90px] py-16 xl:py-[81px] items-center justify-center z-10">
+          <div className="w-full bg-[#F7F7F2] rounded-[24px] px-8 xl:px-[40px] py-6 xl:py-[32px] flex items-center gap-6 shadow-xl">
+            {/* Logo Image */}
+            <div className="relative w-[110px] h-[113px] shrink-0">
+              <Image
+                src="/images/hero/logo-yli.webp"
+                alt="Young Leaders for Indonesia Logo"
+                fill
+                priority
+                loading="eager"
+                sizes="111px"
+                className="object-contain"
+              />
+            </div>
+
+            {/* Content text */}
+            <div className="flex flex-col items-start">
+              <Typography
+                as="h2"
+                font="Sora"
+                weight="bold"
+                className="text-[32px] xl:text-[40px] font-bold leading-tight bg-gradient-to-r from-[#14251F] to-[#115C3A] from-[-7.78%] to-[100%] bg-clip-text text-transparent"
+              >
+                Lahir dari PLP YLI 2026
+              </Typography>
+              <p className="font-Inter text-[#17221F] text-[16px] xl:text-[20px] font-normal leading-relaxed mt-2">
+                Openpath.id dibentuk sebagai Personal Leadership Project (PLP) dalam program Young
+                Leaders for Indonesia (YLI) National Wave 2026 untuk membuka akses informasi dan
+                mendukung langkah mahasiswa
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile & Tablet Layout (< lg) */}
+        <div className="flex lg:hidden flex-col items-center w-full pt-[63px] pb-[27px] px-6 z-10 relative">
+          {/* Top Card (Logo) - z-20 to be above the yellow lines */}
+          <div className="w-full bg-[#F7F7F2] rounded-[20px] p-8 flex items-center justify-center shadow-md relative z-20">
+            <div className="relative w-full max-w-[282px] aspect-[282/275]">
+              <Image
+                src="/images/hero/logo-yli.webp"
+                alt="Young Leaders for Indonesia Logo"
+                fill
+                priority
+                loading="eager"
+                sizes="(max-width: 640px) 282px, 320px"
+                className="object-contain"
+              />
+            </div>
+          </div>
+
+          {/* 2 Vertical Connecting Lines - positioned behind both cards */}
+          <div className="w-full flex justify-between px-10 sm:px-16 my-[-20px] relative z-10 pointer-events-none">
+            <div className="w-[10px] h-[70px] bg-[#F2C94C] rounded-sm" />
+            <div className="w-[10px] h-[70px] bg-[#F2C94C] rounded-sm" />
+          </div>
+
+          {/* Bottom Card (Text Content) - z-20 to be above the yellow lines */}
+          <div className="w-full bg-[#F7F7F2] rounded-[14px] px-6 py-8 flex flex-col items-start shadow-md relative z-20">
+            <Typography
+              as="h2"
+              font="Sora"
+              weight="bold"
+              className="text-[#17221F] text-[20px] font-bold leading-tight"
+            >
+              Lahir dari PLP YLI 2026
+            </Typography>
+            <p className="font-Inter text-[#17221F] text-[12px] font-normal leading-4 mt-1">
+              Openpath.id dibentuk sebagai Personal Leadership Project (PLP) dalam program Young
+              Leaders for Indonesia (YLI) National Wave 2026 untuk membuka akses informasi dan
+              mendukung langkah mahasiswa
+            </p>
+          </div>
+        </div>
+
+        {/* Bottom Ellipse Gradient (Mobile & Desktop) */}
+        <div
+          className="absolute -bottom-8 md:-bottom-10 lg:-bottom-14 left-1/2 -translate-x-1/2 rounded-[50%] pointer-events-none z-0 w-[140%] sm:w-[130%] lg:w-[120%] h-[100px] md:h-[120px] lg:h-[140px]"
+          style={{
+            background: "linear-gradient(270deg, #F2C94C 13.88%, #8C742C 89.14%)",
+          }}
+        />
+      </section>
     </>
   );
 }
