@@ -17,6 +17,7 @@ export default function Footer() {
                 src="/images/logo-openpath.svg"
                 alt="Openpath Logo"
                 fill
+                sizes="(min-width: 1280px) 92px, (min-width: 768px) 64px, 40px"
                 className="object-contain"
                 priority
               />
@@ -46,7 +47,13 @@ export default function Footer() {
                 className="bg-white rounded-[24px] md:rounded-full p-[6px] md:p-2 xl:p-[10px] flex items-center justify-center hover:opacity-90 active:scale-95 transition-all shrink-0"
               >
                 <div className="relative w-5 h-5 md:w-[22px] md:h-[22px] xl:w-6 xl:h-6">
-                  <Image src={social.icon} alt={social.name} fill className="object-contain" />
+                  <Image
+                    src={social.icon}
+                    alt={social.name}
+                    fill
+                    sizes="(min-width: 1280px) 24px, 20px"
+                    className="object-contain"
+                  />
                 </div>
               </Link>
             ))}

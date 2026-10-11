@@ -24,6 +24,7 @@ export default function Navbar() {
               src="/images/logo-openpath.svg"
               alt="Openpath Logo"
               fill
+              sizes="(min-width: 1024px) 50px, 40px"
               className="object-contain"
               priority
             />
@@ -83,6 +84,7 @@ export default function Navbar() {
                 src="/images/logo-openpath.svg"
                 alt="Openpath Logo"
                 fill
+                sizes="64px"
                 className="object-contain"
                 priority
               />

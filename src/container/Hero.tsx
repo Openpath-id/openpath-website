@@ -16,6 +16,7 @@ export default function Hero() {
             alt="Hero background"
             fill
             priority
+            sizes="100vw"
             className="object-cover object-center scale-x-[-1.25] scale-y-[1.25] md:scale-x-[-1] md:scale-y-100 origin-center transition-transform"
           />
         </div>
@@ -76,6 +77,7 @@ export default function Hero() {
             src="/images/hero/logo-green.webp"
             alt="Openpath Logo"
             fill
+            sizes="(min-width: 1536px) 734px, (min-width: 1024px) 600px, 0px"
             className="object-contain"
           />
         </div>
@@ -87,6 +89,7 @@ export default function Hero() {
               src="/images/hero/logo-green.webp"
               alt="Openpath Logo"
               fill
+              sizes="200px"
               className="object-contain"
             />
           </div>
