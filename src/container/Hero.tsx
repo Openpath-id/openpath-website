@@ -97,10 +97,16 @@ export default function Hero() {
               as="h2"
               font="Sora"
               weight="semibold"
-              className="text-[24px] md:text-[36px] lg:text-[48px] font-semibold leading-[125%] bg-gradient-to-r from-[#14251F] to-[#115C3A] from-[-7.78%] to-[100%] bg-clip-text text-transparent inline-block"
+              className="text-[24px] md:text-[36px] lg:text-[48px] font-semibold leading-[125%] inline-block"
             >
-              Untuk Siapa
-              <br className="lg:hidden" /> Openpath.id hadir?
+              <span className="bg-gradient-to-r from-[#14251F] to-[#115C3A] from-[-7.78%] to-[100%] bg-clip-text text-transparent">
+                Untuk Siapa
+                <br className="lg:hidden" /> Openpath
+              </span>
+              <span className="text-[#F2C94C]">.</span>
+              <span className="bg-gradient-to-r from-[#14251F] to-[#115C3A] from-[-7.78%] to-[100%] bg-clip-text text-transparent">
+                id hadir?
+              </span>
             </Typography>
 
             <p className="font-Inter text-[#17221F] text-[14px] lg:text-[18px] font-normal leading-6 max-w-[800px] text-justify">

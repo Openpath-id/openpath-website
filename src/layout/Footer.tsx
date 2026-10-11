@@ -26,7 +26,7 @@ export default function Footer() {
               weight="bold"
               className="text-white text-[16px] md:text-[28px] xl:text-[44px] leading-tight"
             >
-              Openpath.id
+              Openpath<span className="text-[#F2C94C]">.</span>id
             </Typography>
           </Link>
 

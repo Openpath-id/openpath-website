@@ -33,7 +33,7 @@ export default function Navbar() {
             weight="bold"
             className="text-white text-[16px] lg:text-[24px] leading-tight"
           >
-            Openpath.id
+            Openpath<span className="text-[#F2C94C]">.</span>id
           </Typography>
         </Link>
 
@@ -92,7 +92,7 @@ export default function Navbar() {
               weight="bold"
               className="text-white text-[25.6px] leading-tight"
             >
-              Openpath.id
+              Openpath<span className="text-[#F2C94C]">.</span>id
             </Typography>
           </div>
 
