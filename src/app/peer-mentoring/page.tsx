@@ -49,7 +49,7 @@ export default function PeerMentoringPage() {
           alt="Illustration Path Mobile"
           fill
           priority
-          sizes="100vw"
+          sizes="(max-width: 500px) 100vw, 0px"
           className="object-contain object-bottom"
         />
       </div>
@@ -61,7 +61,7 @@ export default function PeerMentoringPage() {
           alt="Illustration Path Desktop"
           fill
           priority
-          sizes="100vw"
+          sizes="(min-width: 500px) 100vw, 0px"
           className="object-contain object-bottom"
         />
       </div>
