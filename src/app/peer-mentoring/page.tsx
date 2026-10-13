@@ -41,27 +41,27 @@ export default function PeerMentoringPage() {
         </div>
       </div>
 
-      {/* Background Bottom Illustration */}
-      {/* Mobile Illustration (< 500px) */}
-      <div className="min-[500px]:hidden absolute bottom-0 inset-x-0 w-full h-[360px] pointer-events-none select-none z-0">
+      {/* Background Bottom Illustration: Layered Path & Student */}
+      {/* Path Layer (z-0) */}
+      <div className="absolute -bottom-[180px] md:-bottom-[300px] xl:-bottom-[450px] left-1/2 -translate-x-1/2 w-[1010px] md:w-[1400px] xl:w-[1875px] h-[500px] md:h-[700px] xl:h-[900px] pointer-events-none select-none z-0">
         <Image
-          src="/images/hero/path-mobile.webp"
-          alt="Illustration Path Mobile"
+          src="/images/hero/path.webp"
+          alt="Illustration Path"
           fill
           priority
-          sizes="(max-width: 500px) 100vw, 0px"
+          sizes="(min-width: 1280px) 1875px, (min-width: 768px) 1400px, 1010px"
           className="object-contain object-bottom"
         />
       </div>
 
-      {/* Desktop & Tablet Illustration (>= 500px) */}
-      <div className="hidden min-[500px]:block absolute bottom-0 inset-x-0 w-full h-[360px] sm:h-[460px] md:h-[540px] xl:h-[640px] 2xl:h-[720px] pointer-events-none select-none z-0">
+      {/* Student Layer (z-[1]) */}
+      <div className="absolute -bottom-[63px] md:-bottom-[90px] xl:-bottom-[126px] left-[calc(115/390*100%)] md:left-1/2 md:-translate-x-1/2 xl:left-[calc(502/1440*100%)] xl:translate-x-0 w-[142px] md:w-[180px] xl:w-[264px] h-[246px] md:h-[310px] xl:h-[458px] pointer-events-none select-none z-[1]">
         <Image
-          src="/images/hero/path-desktop.webp"
-          alt="Illustration Path Desktop"
+          src="/images/hero/student-searching.webp"
+          alt="Student Searching Illustration"
           fill
           priority
-          sizes="(min-width: 500px) 100vw, 0px"
+          sizes="(min-width: 1280px) 264px, (min-width: 768px) 180px, 142px"
           className="object-contain object-bottom"
         />
       </div>
