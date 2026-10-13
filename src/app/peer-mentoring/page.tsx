@@ -43,7 +43,7 @@ export default function PeerMentoringPage() {
 
       {/* Background Bottom Illustration: Layered Path & Student */}
       {/* Path Layer (z-0) */}
-      <div className="absolute -bottom-[180px] md:-bottom-[300px] xl:-bottom-[450px] left-1/2 -translate-x-1/2 w-[1010px] md:w-[1400px] xl:w-[1875px] h-[500px] md:h-[700px] xl:h-[900px] pointer-events-none select-none z-0">
+      <div className="absolute -bottom-[180px] md:-bottom-[300px] lg:-bottom-[450px] xl:-bottom-[500px] 2xl:-bottom-[550px] left-1/2 -translate-x-1/2 w-[1010px] md:w-[1400px] xl:w-[1875px] h-[500px] md:h-[700px] xl:h-[900px] pointer-events-none select-none z-0">
         <Image
           src="/images/hero/path.webp"
           alt="Illustration Path"
