@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { Program, ProgramType } from "@/types/program";
-import { supabase } from "@/lib/supabase";
 
 export type FilterType = "all" | ProgramType;
 
@@ -14,32 +13,27 @@ export function usePrograms(initialFilter: FilterType = "all") {
 
   useEffect(() => {
     async function fetchPrograms() {
-      if (!supabase) {
-        setPrograms([]);
-        setLoading(false);
-        return;
-      }
-
       try {
         setLoading(true);
         setError(null);
-        // Memanggil Database Function get_nearest_programs
-        const { data, error: err } = await supabase.rpc("get_nearest_programs", {
-          p_type: selectedFilter === "all" ? null : selectedFilter,
-          p_limit: 4,
+
+        // Fetch dari Server-Side API Route (Supabase URL & Key 100% aman di server)
+        const params = new URLSearchParams({
+          type: selectedFilter,
+          limit: "4",
         });
 
-        if (err) {
-          throw err;
+        const res = await fetch(`/api/programs/nearest?${params.toString()}`);
+
+        if (!res.ok) {
+          const errData = await res.json().catch(() => ({}));
+          throw new Error(errData.error || `HTTP error! status: ${res.status}`);
         }
 
-        if (data && data.length > 0) {
-          setPrograms(data as Program[]);
-        } else {
-          setPrograms([]);
-        }
+        const data = await res.json();
+        setPrograms(Array.isArray(data) ? (data as Program[]) : []);
       } catch (err: unknown) {
-        console.error("Error fetching programs via RPC:", err);
+        console.error("Error fetching programs via API Route:", err);
         setError(err instanceof Error ? err.message : "Gagal memuat program");
         setPrograms([]);
       } finally {
