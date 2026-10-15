@@ -1,9 +1,11 @@
 import Hero from "@/container/Hero";
+import NearestDeadlines from "@/container/NearestDeadlines";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 w-full">
+    <main className="flex flex-col flex-1 w-full">
       <Hero />
-    </div>
+      <NearestDeadlines />
+    </main>
   );
 }
