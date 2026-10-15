@@ -7,8 +7,11 @@ import { usePrograms, FilterType } from "@/hooks/usePrograms";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function NearestDeadlines() {
-  const { filteredPrograms, selectedFilter, setSelectedFilter, loading } = usePrograms();
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const { filteredPrograms, selectedFilter, setSelectedFilter, loading } = usePrograms(
+    "all",
+    currentPage,
+  );
 
   const filterTabs: { labelDesktop: string; labelMobile: string; value: FilterType }[] = [
     { labelDesktop: "Semua", labelMobile: "Semua", value: "all" },

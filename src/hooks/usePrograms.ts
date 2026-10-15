@@ -5,7 +5,7 @@ import { Program, ProgramType } from "@/types/program";
 
 export type FilterType = "all" | ProgramType;
 
-export function usePrograms(initialFilter: FilterType = "all") {
+export function usePrograms(initialFilter: FilterType = "all", page: number = 1) {
   const [selectedFilter, setSelectedFilter] = useState<FilterType>(initialFilter);
   const [programs, setPrograms] = useState<Program[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -17,10 +17,11 @@ export function usePrograms(initialFilter: FilterType = "all") {
         setLoading(true);
         setError(null);
 
-        // Fetch dari Server-Side API Route (Supabase URL & Key 100% aman di server)
+        // Fetch dari Server-Side API Route dengan filter & page
         const params = new URLSearchParams({
           type: selectedFilter,
           limit: "4",
+          page: page.toString(),
         });
 
         const res = await fetch(`/api/programs/nearest?${params.toString()}`);
@@ -42,7 +43,7 @@ export function usePrograms(initialFilter: FilterType = "all") {
     }
 
     fetchPrograms();
-  }, [selectedFilter]);
+  }, [selectedFilter, page]);
 
   const filteredPrograms = programs;
 
