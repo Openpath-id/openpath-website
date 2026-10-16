@@ -7,20 +7,7 @@ import Typography from "@/components/Typography";
 export default function OpportunityCta() {
   return (
     <section className="relative w-full bg-[#F7F7F2] overflow-hidden flex flex-col justify-start">
-      {/* Content Container:
-          Mobile (< 768px): pt 48px, px 24px
-          Tablet (768px - 1024px / md): pt 64px, px 36px
-          Laptop (1024px - 1280px / lg): pt 80px, px 48px
-          Desktop (>= 1280px / xl): pt 100px, pr 65px, pl 652px, pb 364px
-      */}
       <div className="relative z-10 w-full flex flex-col pt-12 px-6 md:pt-16 md:px-9 lg:pt-20 lg:px-12 xl:pt-[100px] xl:pr-[65px] xl:pl-[652px] xl:pb-[364px]">
-        {/* Title: 2 Baris, Font Sora
-            Mobile: 24px
-            Tablet (md): 32px
-            Laptop (lg): 36px
-            Desktop (xl): 40px
-            Font Bold, leading-tight, linear-gradient text
-        */}
         <Typography
           as="h2"
           font="Sora"
