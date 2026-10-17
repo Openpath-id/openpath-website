@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 import { loginSchema } from "@/app/validation";
 
 export function useAuth() {
@@ -48,6 +49,9 @@ export function useAuth() {
         }
       }
       setFieldErrors(errors);
+      toast.error("Validasi Gagal", {
+        description: "Silakan periksa kembali email dan kata sandi Anda.",
+      });
       return;
     }
 
@@ -65,7 +69,7 @@ export function useAuth() {
       const data = await res.json();
 
       if (!res.ok) {
-        throw new Error(data.error || "Login gagal, silakan coba lagi.");
+        throw new Error(data.error || "Email atau kata sandi salah. Silakan coba lagi.");
       }
 
       // Handle remember me
@@ -85,14 +89,19 @@ export function useAuth() {
         }
       }
 
+      // Toast Success
+      toast.success("Login Berhasil!", {
+        description: "Selamat datang kembali di OpenPath Admin.",
+      });
+
       // Redirect to admin dashboard
       router.push("/admin");
     } catch (err: unknown) {
-      if (err instanceof Error) {
-        setError(err.message);
-      } else {
-        setError("Terjadi kesalahan tidak terduga.");
-      }
+      const errorMsg = err instanceof Error ? err.message : "Terjadi kesalahan tidak terduga.";
+      setError(errorMsg);
+      toast.error("Login Gagal", {
+        description: errorMsg,
+      });
     } finally {
       setLoading(false);
     }

@@ -4,6 +4,7 @@ import { Inter, Sora } from "@/lib/font";
 import { cn } from "@/lib/utils";
 import Navbar from "@/layout/Navbar";
 import Footer from "@/layout/Footer";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "Openpath.id",
@@ -18,6 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Navbar />
         <div className="flex-1 flex flex-col">{children}</div>
         <Footer />
+        <Toaster />
       </body>
     </html>
   );
