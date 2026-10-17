@@ -167,7 +167,7 @@ export default function LoginForm({ idPrefix = "auth", isDesktop = false }: Logi
       </Button>
 
       {/* Footer Text (gap ke bawah 32px) */}
-      <div className="mt-[32px] text-center">
+      {/* <div className="mt-[32px] text-center">
         <span
           className={`${
             isDesktop ? "text-[14px]" : "text-[12px]"
@@ -183,7 +183,7 @@ export default function LoginForm({ idPrefix = "auth", isDesktop = false }: Logi
         >
           Daftar
         </Link>
-      </div>
+      </div> */}
     </form>
   );
 }
