@@ -19,7 +19,7 @@ import {
 } from "lucide-react";
 import Typography from "@/components/Typography";
 import { Program } from "@/types/program";
-import { DUMMY_STORIES } from "@/data/stories";
+import { ApplicantStory } from "@/types/story";
 import { useProgramDetail } from "@/hooks/useProgramDetail";
 import {
   Breadcrumb,
@@ -32,9 +32,13 @@ import {
 
 interface ProgramDetailClientProps {
   program: Program;
+  initialStories?: ApplicantStory[];
 }
 
-export default function ProgramDetailClient({ program: initialProgram }: ProgramDetailClientProps) {
+export default function ProgramDetailClient({
+  program: initialProgram,
+  initialStories = [],
+}: ProgramDetailClientProps) {
   const router = useRouter();
 
   // Data integration hook from /hooks
@@ -48,16 +52,21 @@ export default function ProgramDetailClient({ program: initialProgram }: Program
     defaultSummary,
   } = useProgramDetail(initialProgram.id, initialProgram);
 
-  const stories = DUMMY_STORIES;
+  const stories = initialStories;
   const [currentStoryIndex, setCurrentStoryIndex] = useState(0);
 
-  const nextStory = () => setCurrentStoryIndex((prev) => (prev + 1) % stories.length);
-  const prevStory = () =>
+  const nextStory = () => {
+    if (stories.length === 0) return;
+    setCurrentStoryIndex((prev) => (prev + 1) % stories.length);
+  };
+  const prevStory = () => {
+    if (stories.length === 0) return;
     setCurrentStoryIndex((prev) => (prev === 0 ? stories.length - 1 : prev - 1));
+  };
   const goToStory = (idx: number) => setCurrentStoryIndex(idx);
 
   const currentProgram = program || initialProgram;
-  const currentMobileStory = stories[currentStoryIndex] || stories[0];
+  const currentMobileStory = stories[currentStoryIndex] || stories[0] || null;
 
   const handleBack = () => {
     if (typeof window !== "undefined" && window.history.length > 1) {
@@ -361,153 +370,163 @@ export default function ProgramDetailClient({ program: initialProgram }: Program
             </p>
           </div>
 
-          {/* Desktop View: Side by Side (2 columns) */}
-          <div className="hidden xl:grid grid-cols-2 gap-6">
-            {stories.slice(0, 2).map((story) => (
-              <div
-                key={story.id}
-                className="bg-white rounded-[16px] p-6 text-[#17221F] flex flex-col justify-between gap-4 shadow-sm"
-              >
-                <div className="flex flex-col gap-3">
-                  {/* Badge */}
-                  <div className="self-start px-2.5 py-0.5 rounded-[19px] border border-[#176B5B] bg-[#DCEFE7]">
-                    <span className="font-Inter text-[11px] font-medium text-[#176B5B]">
-                      {story.badge}
-                    </span>
-                  </div>
+          {stories.length === 0 ? (
+            <div className="bg-white/10 rounded-[16px] p-6 text-center text-white/80 font-Inter text-[14px]">
+              Belum ada cerita aplikan yang ditautkan untuk program ini.
+            </div>
+          ) : (
+            <>
+              {/* Desktop View: Side by Side (2 columns) */}
+              <div className="hidden xl:grid grid-cols-2 gap-6">
+                {stories.slice(0, 2).map((story) => (
+                  <div
+                    key={story.id}
+                    className="bg-white rounded-[16px] p-6 text-[#17221F] flex flex-col justify-between gap-4 shadow-sm"
+                  >
+                    <div className="flex flex-col gap-3">
+                      {/* Badge */}
+                      <div className="self-start px-2.5 py-0.5 rounded-[19px] border border-[#176B5B] bg-[#DCEFE7]">
+                        <span className="font-Inter text-[11px] font-medium text-[#176B5B]">
+                          {story.badge}
+                        </span>
+                      </div>
 
-                  {/* Author Row */}
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-[#DCEFE7] text-[#176B5B] flex items-center justify-center shrink-0">
-                      <User className="w-5 h-5 text-[#176B5B]" />
+                      {/* Author Row */}
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-[#DCEFE7] text-[#176B5B] flex items-center justify-center shrink-0">
+                          <User className="w-5 h-5 text-[#176B5B]" />
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="font-Sora font-bold text-[14px] text-[#17221F]">
+                            {story.authorName}
+                          </span>
+                          <span className="font-Inter text-[12px] text-neutral-500">
+                            {story.authorRole}
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="border-b border-neutral-200 my-1" />
+
+                      {/* Story Title & Excerpt */}
+                      <Typography
+                        as="h3"
+                        font="Sora"
+                        weight="bold"
+                        className="text-[15px] font-bold text-[#17221F] leading-snug"
+                      >
+                        {story.title}
+                      </Typography>
+
+                      <p className="font-Inter text-[12px] text-neutral-600 leading-relaxed">
+                        {story.excerpt}
+                      </p>
                     </div>
-                    <div className="flex flex-col">
-                      <span className="font-Sora font-bold text-[14px] text-[#17221F]">
-                        {story.authorName}
-                      </span>
-                      <span className="font-Inter text-[12px] text-neutral-500">
-                        {story.authorRole}
-                      </span>
-                    </div>
+
+                    <Link
+                      href="/cerita-aplikan"
+                      className="self-start inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#176B5B] hover:bg-[#125548] text-white text-[12px] font-semibold transition-colors mt-2"
+                    >
+                      <span>Lihat detail</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
                   </div>
-
-                  <div className="border-b border-neutral-200 my-1" />
-
-                  {/* Story Title & Excerpt */}
-                  <Typography
-                    as="h3"
-                    font="Sora"
-                    weight="bold"
-                    className="text-[15px] font-bold text-[#17221F] leading-snug"
-                  >
-                    {story.title}
-                  </Typography>
-
-                  <p className="font-Inter text-[12px] text-neutral-600 leading-relaxed">
-                    {story.excerpt}
-                  </p>
-                </div>
-
-                <Link
-                  href="/cerita-aplikan"
-                  className="self-start inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#176B5B] hover:bg-[#125548] text-white text-[12px] font-semibold transition-colors mt-2"
-                >
-                  <span>Lihat detail</span>
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-              </div>
-            ))}
-          </div>
-
-          {/* Mobile / Tablet View: Interactive Carousel Card */}
-          <div className="flex xl:hidden flex-col gap-4">
-            <div className="bg-white rounded-[16px] p-5 md:p-6 text-[#17221F] flex flex-col justify-between gap-4 shadow-sm">
-              <div className="flex flex-col gap-3">
-                {/* Badge */}
-                <div className="self-start px-2.5 py-0.5 rounded-[19px] border border-[#176B5B] bg-[#DCEFE7]">
-                  <span className="font-Inter text-[11px] font-medium text-[#176B5B]">
-                    {currentMobileStory.badge}
-                  </span>
-                </div>
-
-                {/* Author Row */}
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-[#DCEFE7] text-[#176B5B] flex items-center justify-center shrink-0">
-                    <User className="w-5 h-5 text-[#176B5B]" />
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="font-Sora font-bold text-[14px] text-[#17221F]">
-                      {currentMobileStory.authorName}
-                    </span>
-                    <span className="font-Inter text-[12px] text-neutral-500">
-                      {currentMobileStory.authorRole}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="border-b border-neutral-200 my-1" />
-
-                {/* Title with floating overlay carousel arrows in front */}
-                <div className="relative flex items-center">
-                  <button
-                    type="button"
-                    onClick={prevStory}
-                    className="absolute -left-1 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-neutral-400/80 hover:bg-neutral-500 text-white flex items-center justify-center cursor-pointer shadow-sm z-10 transition-colors"
-                    aria-label="Story sebelumnya"
-                  >
-                    <ChevronLeft className="w-4 h-4 text-white" />
-                  </button>
-
-                  <Typography
-                    as="h3"
-                    font="Sora"
-                    weight="bold"
-                    className="text-[15px] font-bold text-[#17221F] leading-snug w-full text-left"
-                  >
-                    {currentMobileStory.title}
-                  </Typography>
-
-                  <button
-                    type="button"
-                    onClick={nextStory}
-                    className="absolute -right-1 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-neutral-400/80 hover:bg-neutral-500 text-white flex items-center justify-center cursor-pointer shadow-sm z-10 transition-colors"
-                    aria-label="Story berikutnya"
-                  >
-                    <ChevronRight className="w-4 h-4 text-white" />
-                  </button>
-                </div>
-
-                <p className="font-Inter text-[12px] text-neutral-600 leading-relaxed text-justify">
-                  {currentMobileStory.excerpt}
-                </p>
+                ))}
               </div>
 
-              <Link
-                href="/cerita-aplikan"
-                className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-[#176B5B] hover:bg-[#125548] text-white text-[13px] font-semibold transition-colors mt-2"
-              >
-                <span>Lihat detail</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
+              {/* Mobile / Tablet View: Interactive Carousel Card */}
+              {currentMobileStory && (
+                <div className="flex xl:hidden flex-col gap-4">
+                  <div className="bg-white rounded-[16px] p-5 md:p-6 text-[#17221F] flex flex-col justify-between gap-4 shadow-sm">
+                    <div className="flex flex-col gap-3">
+                      {/* Badge */}
+                      <div className="self-start px-2.5 py-0.5 rounded-[19px] border border-[#176B5B] bg-[#DCEFE7]">
+                        <span className="font-Inter text-[11px] font-medium text-[#176B5B]">
+                          {currentMobileStory.badge}
+                        </span>
+                      </div>
 
-            {/* Dots Indicator */}
-            <div className="flex items-center justify-center gap-1.5 py-1">
-              {stories.map((_, idx) => (
-                <button
-                  key={idx}
-                  type="button"
-                  onClick={() => goToStory(idx)}
-                  className={`h-2 rounded-full transition-all cursor-pointer ${
-                    currentStoryIndex === idx
-                      ? "w-8 bg-[#F2C94C]"
-                      : "w-2 bg-white/60 hover:bg-white"
-                  }`}
-                  aria-label={`Pilih cerita ${idx + 1}`}
-                />
-              ))}
-            </div>
-          </div>
+                      {/* Author Row */}
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-[#DCEFE7] text-[#176B5B] flex items-center justify-center shrink-0">
+                          <User className="w-5 h-5 text-[#176B5B]" />
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="font-Sora font-bold text-[14px] text-[#17221F]">
+                            {currentMobileStory.authorName}
+                          </span>
+                          <span className="font-Inter text-[12px] text-neutral-500">
+                            {currentMobileStory.authorRole}
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="border-b border-neutral-200 my-1" />
+
+                      {/* Title with floating overlay carousel arrows in front */}
+                      <div className="relative flex items-center">
+                        <button
+                          type="button"
+                          onClick={prevStory}
+                          className="absolute -left-1 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-neutral-400/80 hover:bg-neutral-500 text-white flex items-center justify-center cursor-pointer shadow-sm z-10 transition-colors"
+                          aria-label="Story sebelumnya"
+                        >
+                          <ChevronLeft className="w-4 h-4 text-white" />
+                        </button>
+
+                        <Typography
+                          as="h3"
+                          font="Sora"
+                          weight="bold"
+                          className="text-[15px] font-bold text-[#17221F] leading-snug w-full text-left"
+                        >
+                          {currentMobileStory.title}
+                        </Typography>
+
+                        <button
+                          type="button"
+                          onClick={nextStory}
+                          className="absolute -right-1 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-neutral-400/80 hover:bg-neutral-500 text-white flex items-center justify-center cursor-pointer shadow-sm z-10 transition-colors"
+                          aria-label="Story berikutnya"
+                        >
+                          <ChevronRight className="w-4 h-4 text-white" />
+                        </button>
+                      </div>
+
+                      <p className="font-Inter text-[12px] text-neutral-600 leading-relaxed text-justify">
+                        {currentMobileStory.excerpt}
+                      </p>
+                    </div>
+
+                    <Link
+                      href="/cerita-aplikan"
+                      className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-[#176B5B] hover:bg-[#125548] text-white text-[13px] font-semibold transition-colors mt-2"
+                    >
+                      <span>Lihat detail</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </div>
+
+                  {/* Dots Indicator */}
+                  <div className="flex items-center justify-center gap-1.5 py-1">
+                    {stories.map((_, idx) => (
+                      <button
+                        key={idx}
+                        type="button"
+                        onClick={() => goToStory(idx)}
+                        className={`h-2 rounded-full transition-all cursor-pointer ${
+                          currentStoryIndex === idx
+                            ? "w-8 bg-[#F2C94C]"
+                            : "w-2 bg-white/60 hover:bg-white"
+                        }`}
+                        aria-label={`Pilih cerita ${idx + 1}`}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
+            </>
+          )}
 
           {/* Bottom Banner: Ingin tahu cerita aplikan yang lainnya? */}
           <div className="bg-white rounded-[16px] p-5 md:p-6 text-[#17221F] flex flex-col md:flex-row md:items-center md:justify-between gap-4 shadow-sm">

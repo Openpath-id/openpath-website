@@ -2,6 +2,7 @@ import React, { Suspense } from "react";
 import Link from "next/link";
 import { Metadata } from "next";
 import { getProgramByIdOrSlug } from "@/lib/programs";
+import { getRelatedStories } from "@/lib/stories";
 import ProgramDetailClient from "@/components/program-detail/ProgramDetailClient";
 import ProgramDetailSkeleton from "@/components/program-detail/ProgramDetailSkeleton";
 
@@ -39,7 +40,9 @@ async function ProgramDetailFetcher({ params }: PageProps) {
     );
   }
 
-  return <ProgramDetailClient program={program} />;
+  const stories = await getRelatedStories(program.id, 2);
+
+  return <ProgramDetailClient program={program} initialStories={stories} />;
 }
 
 export default function ProgramDetailPage({ params }: PageProps) {
