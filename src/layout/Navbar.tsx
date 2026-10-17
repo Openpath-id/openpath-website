@@ -3,12 +3,23 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { ArrowLeft, Menu } from "lucide-react";
 import Typography from "@/components/Typography";
 import { NAV_ITEMS } from "@/data/navigation";
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+
+  // Hide Navbar on auth pages (login/register) and admin dashboard
+  if (
+    pathname?.startsWith("/login") ||
+    pathname?.startsWith("/register") ||
+    pathname?.startsWith("/admin")
+  ) {
+    return null;
+  }
 
   return (
     <>

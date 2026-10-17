@@ -1,9 +1,22 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Typography from "@/components/Typography";
 import { SOCIAL_LINKS, PLATFORM_LINKS, COMPANY_LINKS } from "@/data/navigation";
 
 export default function Footer() {
+  const pathname = usePathname();
+
+  // Hide Footer on auth pages (login/register) and admin dashboard
+  if (
+    pathname?.startsWith("/login") ||
+    pathname?.startsWith("/register") ||
+    pathname?.startsWith("/admin")
+  ) {
+    return null;
+  }
   return (
     <footer className="w-full bg-gradient-to-r from-[#14251F] to-[#115C3A] from-[-7.78%] to-[100%] text-white px-6 md:px-12 xl:px-[90px] pt-[55px] md:pt-[70px] xl:pt-[97px] pb-8 md:pb-10 xl:pb-[46px]">
       {/* Top Section */}
