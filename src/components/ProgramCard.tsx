@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import Typography from "@/components/Typography";
 import { Program } from "@/types/program";
+import { getDeadlineBadgeInfo } from "@/lib/deadline";
 
 interface ProgramCardProps {
   program: Program;
@@ -26,34 +27,14 @@ export default function ProgramCard({ program }: ProgramCardProps) {
       ? program.education_levels.join(", ")
       : null;
 
-  // Tanggal yang ditampilkan: jika sudah lewat / diestimasi, tampilkan next_deadline_est, jika belum tampilkan deadline_date
+  // Tanggal deadline mentah
   const displayDateRaw = program.is_deadline_estimated
     ? program.next_deadline_est || program.deadline_date
     : program.deadline_date;
 
-  // Format tanggal untuk tampilan UI
-  let formattedDate = displayDateRaw;
-  if (displayDateRaw && !isNaN(Date.parse(displayDateRaw))) {
-    formattedDate = new Date(displayDateRaw).toLocaleDateString("id-ID", {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    });
-  }
-
-  // Label status deadline badge (misal: "Masih buka", "Akan buka", "3 hari lagi", dll.)
-  const deadlineStatus =
-    program.deadline_status || (program.is_deadline_estimated ? "Akan buka" : "Masih buka");
-
-  // Status badge styling:
-  // - Kuning/Emas: "Akan buka" atau estimasi
-  // - Merah: Sangat mendesak (misal "3 hari lagi", "hari ini", "1 hari", "2 hari")
-  // - Kuning/Normal: "Masih buka"
-  const isUrgent =
-    deadlineStatus?.toLowerCase().includes("hari ini") ||
-    deadlineStatus?.toLowerCase().includes("1 hari") ||
-    deadlineStatus?.toLowerCase().includes("2 hari") ||
-    deadlineStatus?.toLowerCase().includes("3 hari");
+  // Hitung status badge & format tanggal (hanya jika ada deadline_date)
+  const deadlineInfo = getDeadlineBadgeInfo(displayDateRaw);
+  const formattedDate = deadlineInfo?.formattedDate || null;
 
   return (
     <div className="w-full bg-white rounded-[24px] p-6 xl:p-8 flex flex-col justify-between shadow-sm border border-neutral-100 hover:shadow-md transition-shadow">
@@ -115,17 +96,13 @@ export default function ProgramCard({ program }: ProgramCardProps) {
               </span>
             </div>
 
-            {/* Right side tag: 8px 2px padding, rounded 20px */}
-            {deadlineStatus && (
+            {/* Right side tag: hanya tampilkan jika ada deadline date */}
+            {deadlineInfo && (
               <div
-                className={`shrink-0 px-2 py-[2px] rounded-[20px] border ${
-                  isUrgent
-                    ? "border-[#C94F4F] bg-[#FFD1D1] text-[#C94F4F]"
-                    : "border-[#F2C94C] bg-[#FFF8E7] text-[#D49E00]"
-                }`}
+                className={`shrink-0 px-2.5 py-[2px] rounded-[20px] border ${deadlineInfo.className}`}
               >
                 <span className="font-Inter text-[12px] font-medium leading-none whitespace-nowrap">
-                  {deadlineStatus}
+                  {deadlineInfo.label}
                 </span>
               </div>
             )}

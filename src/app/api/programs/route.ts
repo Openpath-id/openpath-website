@@ -19,9 +19,11 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    // 1. Build Query for filtered programs
-    let query = supabase.from("programs").select(
-      `
+    // 1. Build Query for filtered programs (Only programs with deadline_date)
+    let query = supabase
+      .from("programs")
+      .select(
+        `
       id,
       type,
       name,
@@ -35,8 +37,9 @@ export async function GET(request: NextRequest) {
       education_levels,
       is_verified
     `,
-      { count: "exact" },
-    );
+        { count: "exact" },
+      )
+      .not("deadline_date", "is", null);
 
     // Filter: Search Keyword (name or organizer)
     if (search) {
@@ -87,37 +90,43 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
-    // 2. Aggregate Counts for Sidebar Badges
-    // We compute total counts for filters (beasiswa, sertifikasi, S1, S2, S3, verified, unverified)
+    // 2. Aggregate Counts for Sidebar Badges (only programs with deadline_date)
     const [beasiswaRes, sertifikasiRes, s1Res, s2Res, s3Res, verifiedRes, unverifiedRes] =
       await Promise.all([
         supabase
           .from("programs")
           .select("*", { count: "exact", head: true })
+          .not("deadline_date", "is", null)
           .eq("type", "beasiswa"),
         supabase
           .from("programs")
           .select("*", { count: "exact", head: true })
+          .not("deadline_date", "is", null)
           .eq("type", "sertifikasi"),
         supabase
           .from("programs")
           .select("*", { count: "exact", head: true })
+          .not("deadline_date", "is", null)
           .contains("education_levels", ["S1"]),
         supabase
           .from("programs")
           .select("*", { count: "exact", head: true })
+          .not("deadline_date", "is", null)
           .contains("education_levels", ["S2"]),
         supabase
           .from("programs")
           .select("*", { count: "exact", head: true })
+          .not("deadline_date", "is", null)
           .contains("education_levels", ["S3"]),
         supabase
           .from("programs")
           .select("*", { count: "exact", head: true })
+          .not("deadline_date", "is", null)
           .eq("is_verified", true),
         supabase
           .from("programs")
           .select("*", { count: "exact", head: true })
+          .not("deadline_date", "is", null)
           .eq("is_verified", false),
       ]);
 
