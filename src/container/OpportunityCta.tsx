@@ -38,7 +38,7 @@ export default function OpportunityCta() {
         <div className="mt-8 md:mt-9 xl:mt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
           {/* Button 1: Solid Green Button */}
           <Link
-            href=""
+            href="/list"
             className="inline-flex items-center justify-center gap-[10px] px-5 py-[10px] md:px-[22px] md:py-[11px] xl:px-6 xl:py-3 rounded-lg bg-[#176B5B] hover:bg-[#125548] text-white transition-colors"
           >
             <span className="font-Inter text-[14px] md:text-[15px] xl:text-[16px] font-semibold leading-[18px] tracking-[-0.14px] xl:tracking-[-0.16px] whitespace-nowrap">
@@ -49,7 +49,7 @@ export default function OpportunityCta() {
 
           {/* Button 2: Outlined Green Button */}
           <Link
-            href=""
+            href="/cerita-aplikan"
             className="inline-flex items-center justify-center px-5 py-[10px] md:px-[22px] md:py-[11px] xl:px-6 xl:py-3 rounded-lg border-2 border-[#176B5B] bg-transparent hover:bg-[#176B5B]/5 text-[#176B5B] transition-colors"
           >
             <span className="font-Inter text-[14px] md:text-[15px] xl:text-[16px] font-semibold leading-[18px] tracking-[-0.14px] xl:tracking-[-0.16px] whitespace-nowrap">

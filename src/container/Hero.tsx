@@ -59,7 +59,7 @@ export default function Hero() {
 
             {/* Action Button */}
             <Link
-              href="/listing"
+              href="/list"
               className="mt-12 md:mt-14 lg:mt-[60px] inline-flex items-center gap-[10px] bg-[#176B5B] hover:bg-[#145d4f] active:scale-95 transition-all text-white px-5 py-[10px] md:px-6 md:py-3 rounded-[8px] font-Inter text-[14px] md:text-[15px] lg:text-[16px] font-semibold shadow-md"
             >
               <span>Lihat Beasiswa &amp; Sertifikasi Terdekat</span>
