@@ -90,45 +90,59 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
-    // 2. Aggregate Counts for Sidebar Badges (only programs with deadline_date)
-    const [beasiswaRes, sertifikasiRes, s1Res, s2Res, s3Res, verifiedRes, unverifiedRes] =
-      await Promise.all([
-        supabase
-          .from("programs")
-          .select("*", { count: "exact", head: true })
-          .not("deadline_date", "is", null)
-          .eq("type", "beasiswa"),
-        supabase
-          .from("programs")
-          .select("*", { count: "exact", head: true })
-          .not("deadline_date", "is", null)
-          .eq("type", "sertifikasi"),
-        supabase
-          .from("programs")
-          .select("*", { count: "exact", head: true })
-          .not("deadline_date", "is", null)
-          .contains("education_levels", ["S1"]),
-        supabase
-          .from("programs")
-          .select("*", { count: "exact", head: true })
-          .not("deadline_date", "is", null)
-          .contains("education_levels", ["S2"]),
-        supabase
-          .from("programs")
-          .select("*", { count: "exact", head: true })
-          .not("deadline_date", "is", null)
-          .contains("education_levels", ["S3"]),
-        supabase
-          .from("programs")
-          .select("*", { count: "exact", head: true })
-          .not("deadline_date", "is", null)
-          .eq("is_verified", true),
-        supabase
-          .from("programs")
-          .select("*", { count: "exact", head: true })
-          .not("deadline_date", "is", null)
-          .eq("is_verified", false),
-      ]);
+    // 2. Aggregate Counts for Sidebar Badges & Admin Cards
+    const today = new Date().toISOString().split("T")[0];
+    const [
+      beasiswaRes,
+      sertifikasiRes,
+      s1Res,
+      s2Res,
+      s3Res,
+      verifiedRes,
+      unverifiedRes,
+      activeRes,
+    ] = await Promise.all([
+      supabase
+        .from("programs")
+        .select("*", { count: "exact", head: true })
+        .not("deadline_date", "is", null)
+        .eq("type", "beasiswa"),
+      supabase
+        .from("programs")
+        .select("*", { count: "exact", head: true })
+        .not("deadline_date", "is", null)
+        .eq("type", "sertifikasi"),
+      supabase
+        .from("programs")
+        .select("*", { count: "exact", head: true })
+        .not("deadline_date", "is", null)
+        .contains("education_levels", ["S1"]),
+      supabase
+        .from("programs")
+        .select("*", { count: "exact", head: true })
+        .not("deadline_date", "is", null)
+        .contains("education_levels", ["S2"]),
+      supabase
+        .from("programs")
+        .select("*", { count: "exact", head: true })
+        .not("deadline_date", "is", null)
+        .contains("education_levels", ["S3"]),
+      supabase
+        .from("programs")
+        .select("*", { count: "exact", head: true })
+        .not("deadline_date", "is", null)
+        .eq("is_verified", true),
+      supabase
+        .from("programs")
+        .select("*", { count: "exact", head: true })
+        .not("deadline_date", "is", null)
+        .eq("is_verified", false),
+      supabase
+        .from("programs")
+        .select("*", { count: "exact", head: true })
+        .not("deadline_date", "is", null)
+        .gte("deadline_date", today),
+    ]);
 
     const counts = {
       beasiswa: beasiswaRes.count ?? 0,
@@ -138,6 +152,7 @@ export async function GET(request: NextRequest) {
       s3: s3Res.count ?? 0,
       verified: verifiedRes.count ?? 0,
       unverified: unverifiedRes.count ?? 0,
+      active: activeRes.count ?? 0,
     };
 
     return NextResponse.json({

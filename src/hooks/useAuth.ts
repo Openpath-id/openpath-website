@@ -18,18 +18,51 @@ export function useAuth() {
     password?: string;
   }>({});
 
+  const [currentUser, setCurrentUser] = useState<{
+    email?: string;
+    name?: string;
+    role?: string;
+  } | null>(null);
+
   useEffect(() => {
-    // Check if there is a remembered email
+    // Check if there is a remembered email & user
     const timer = setTimeout(() => {
       const savedEmail = localStorage.getItem("openpath_remembered_email");
       if (savedEmail) {
         setEmail(savedEmail);
         setRememberMe(true);
       }
+      const savedUser = localStorage.getItem("openpath_user");
+      if (savedUser) {
+        try {
+          setCurrentUser(JSON.parse(savedUser));
+        } catch {
+          // ignore json parse error
+        }
+      }
     }, 0);
 
     return () => clearTimeout(timer);
   }, []);
+
+  const handleLogout = async () => {
+    try {
+      await fetch("/api/auth/logout", { method: "POST" });
+    } catch {
+      // ignore network errors on logout
+    }
+
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("openpath_access_token");
+      localStorage.removeItem("openpath_user");
+    }
+
+    setCurrentUser(null);
+    toast.success("Berhasil Keluar", {
+      description: "Anda telah keluar dari akun admin.",
+    });
+    router.push("/login");
+  };
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -86,6 +119,7 @@ export function useAuth() {
         }
         if (data.user) {
           localStorage.setItem("openpath_user", JSON.stringify(data.user));
+          setCurrentUser(data.user);
         }
       }
 
@@ -130,6 +164,8 @@ export function useAuth() {
     error,
     setError,
     fieldErrors,
+    currentUser,
     handleLogin,
+    handleLogout,
   };
 }
