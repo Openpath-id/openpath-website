@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Program } from "@/types/program";
-import { useDebounce } from "@/hooks/useDebounce";
+import { useDebounce } from "@/lib/useDebounce";
 
 export interface ProgramFilterCounts {
   beasiswa: number;

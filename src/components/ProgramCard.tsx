@@ -134,7 +134,7 @@ export default function ProgramCard({ program }: ProgramCardProps) {
         {/* Detail Button (Right) */}
         {/* Mobile: "Detail", Desktop: "Lihat detail" */}
         <Link
-          href=""
+          href={`/list/${program.id}`}
           className="inline-flex items-center gap-[10px] px-4 py-2 rounded-lg bg-[#176B5B] hover:bg-[#125548] text-white transition-colors"
         >
           <span className="font-Inter text-[12px] font-semibold leading-4 tracking-[-0.12px]">
