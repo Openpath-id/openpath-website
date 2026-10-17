@@ -39,6 +39,7 @@ export default function LoginPage() {
             height={246}
             className="w-full h-full object-contain"
             priority
+            unoptimized
           />
         </div>
 
@@ -74,6 +75,7 @@ export default function LoginPage() {
                 height={744}
                 className="w-full h-full object-contain"
                 priority
+                unoptimized
               />
             </div>
           </div>
