@@ -1,7 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
-import { ChevronUp, ChevronDown, Check } from "lucide-react";
+import React from "react";
+import { Check } from "lucide-react";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "@/components/ui/accordion";
 import { ProgramFilterCounts } from "@/hooks/useProgramList";
 
 interface FilterPanelProps {
@@ -25,37 +31,27 @@ export default function FilterPanel({
   onSelectVerification,
   isMobileModal = false,
 }: FilterPanelProps) {
-  const [openKategori, setOpenKategori] = useState(true);
-  const [openJenjang, setOpenJenjang] = useState(true);
-  const [openVerifikasi, setOpenVerifikasi] = useState(true);
-
   // Styles difference: Mobile modal is light background (#F7F7F2 / white), Desktop is dark green #17221F
   const isDark = !isMobileModal;
 
   return (
     <div className={`w-full flex flex-col ${isDark ? "text-white" : "text-[#17221F]"}`}>
-      {/* Kategori Peluang */}
-      <div className="flex flex-col py-3 border-b border-neutral-200/20">
-        <button
-          type="button"
-          onClick={() => setOpenKategori(!openKategori)}
-          className="flex items-center justify-between w-full cursor-pointer py-1 text-left font-Sora font-bold text-[14px] xl:text-[16px] group select-none"
-        >
-          <span>Kategori Peluang</span>
-          <ChevronDown
-            className={`w-5 h-5 transition-transform duration-300 ease-in-out ${
-              openKategori ? "rotate-180" : "rotate-0"
+      <Accordion
+        type="multiple"
+        defaultValue={["kategori", "jenjang", "verifikasi"]}
+        className="w-full flex flex-col"
+      >
+        {/* Kategori Peluang */}
+        <AccordionItem value="kategori" className="border-b border-neutral-200/20 py-1">
+          <AccordionTrigger
+            className={`py-2 font-Sora font-bold text-[14px] xl:text-[16px] hover:no-underline ${
+              isDark ? "text-white" : "text-[#17221F]"
             }`}
-          />
-        </button>
-
-        <div
-          className={`grid transition-all duration-300 ease-in-out ${
-            openKategori ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-          }`}
-        >
-          <div className="overflow-hidden min-h-0">
-            <div className="flex flex-col gap-3 pt-3">
+          >
+            Kategori Peluang
+          </AccordionTrigger>
+          <AccordionContent className={isDark ? "text-white" : "text-[#17221F]"}>
+            <div className="flex flex-col gap-3 pt-1 pb-1">
               {/* Beasiswa */}
               <label
                 onClick={() => onSelectType("beasiswa")}
@@ -114,32 +110,20 @@ export default function FilterPanel({
                 <span className="text-xs opacity-60">({counts.sertifikasi})</span>
               </label>
             </div>
-          </div>
-        </div>
-      </div>
+          </AccordionContent>
+        </AccordionItem>
 
-      {/* Jenjang Pendidikan */}
-      <div className="flex flex-col py-3 border-b border-neutral-200/20">
-        <button
-          type="button"
-          onClick={() => setOpenJenjang(!openJenjang)}
-          className="flex items-center justify-between w-full cursor-pointer py-1 text-left font-Sora font-bold text-[14px] xl:text-[16px] group select-none"
-        >
-          <span>Jenjang Pendidikan</span>
-          <ChevronDown
-            className={`w-5 h-5 transition-transform duration-300 ease-in-out ${
-              openJenjang ? "rotate-180" : "rotate-0"
+        {/* Jenjang Pendidikan */}
+        <AccordionItem value="jenjang" className="border-b border-neutral-200/20 py-1">
+          <AccordionTrigger
+            className={`py-2 font-Sora font-bold text-[14px] xl:text-[16px] hover:no-underline ${
+              isDark ? "text-white" : "text-[#17221F]"
             }`}
-          />
-        </button>
-
-        <div
-          className={`grid transition-all duration-300 ease-in-out ${
-            openJenjang ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-          }`}
-        >
-          <div className="overflow-hidden min-h-0">
-            <div className="flex flex-col gap-3 pt-3">
+          >
+            Jenjang Pendidikan
+          </AccordionTrigger>
+          <AccordionContent className={isDark ? "text-white" : "text-[#17221F]"}>
+            <div className="flex flex-col gap-3 pt-1 pb-1">
               {["S1", "S2", "S3"].map((lvl) => {
                 const isSelected = selectedEducation === lvl;
                 const lvlCount = lvl === "S1" ? counts.s1 : lvl === "S2" ? counts.s2 : counts.s3;
@@ -171,32 +155,20 @@ export default function FilterPanel({
                 );
               })}
             </div>
-          </div>
-        </div>
-      </div>
+          </AccordionContent>
+        </AccordionItem>
 
-      {/* Status Verifikasi (Checkboxes) */}
-      <div className="flex flex-col py-3">
-        <button
-          type="button"
-          onClick={() => setOpenVerifikasi(!openVerifikasi)}
-          className="flex items-center justify-between w-full cursor-pointer py-1 text-left font-Sora font-bold text-[14px] xl:text-[16px] group select-none"
-        >
-          <span>Status Verifikasi</span>
-          <ChevronDown
-            className={`w-5 h-5 transition-transform duration-300 ease-in-out ${
-              openVerifikasi ? "rotate-180" : "rotate-0"
+        {/* Status Verifikasi (Checkboxes) */}
+        <AccordionItem value="verifikasi" className="border-b-0 py-1">
+          <AccordionTrigger
+            className={`py-2 font-Sora font-bold text-[14px] xl:text-[16px] hover:no-underline ${
+              isDark ? "text-white" : "text-[#17221F]"
             }`}
-          />
-        </button>
-
-        <div
-          className={`grid transition-all duration-300 ease-in-out ${
-            openVerifikasi ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-          }`}
-        >
-          <div className="overflow-hidden min-h-0">
-            <div className="flex flex-col gap-3 pt-3">
+          >
+            Status Verifikasi
+          </AccordionTrigger>
+          <AccordionContent className={isDark ? "text-white" : "text-[#17221F]"}>
+            <div className="flex flex-col gap-3 pt-1 pb-1">
               {/* Terverifikasi */}
               <label
                 onClick={() => onSelectVerification("verified")}
@@ -261,9 +233,9 @@ export default function FilterPanel({
                 <span className="text-xs opacity-60">({counts.unverified})</span>
               </label>
             </div>
-          </div>
-        </div>
-      </div>
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
     </div>
   );
 }

@@ -6,6 +6,13 @@ import Typography from "@/components/Typography";
 import ProgramCard from "@/components/ProgramCard";
 import DesktopFilterSidebar from "@/components/DesktopFilterSidebar";
 import MobileFilterDrawer from "@/components/MobileFilterDrawer";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from "@/components/ui/dropdown-menu";
+import { cn } from "@/lib/utils";
 import { PROGRAM_SORT_OPTIONS } from "@/data/sortOptions";
 import { useProgramList } from "@/hooks/useProgramList";
 
@@ -26,29 +33,6 @@ export default function ProgramListPage() {
 
   // State for mobile filter modal (Gambar 3)
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
-
-  // State for Urutkan dropdown
-  const [isSortOpen, setIsSortOpen] = useState(false);
-  const sortRef = React.useRef<HTMLDivElement>(null);
-  const mobileSortRef = React.useRef<HTMLDivElement>(null);
-
-  React.useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      const target = event.target as Node;
-      const clickedDesktop = sortRef.current && sortRef.current.contains(target);
-      const clickedMobile = mobileSortRef.current && mobileSortRef.current.contains(target);
-      if (!clickedDesktop && !clickedMobile) {
-        setIsSortOpen(false);
-      }
-    }
-
-    if (isSortOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [isSortOpen]);
 
   const currentSortLabel =
     PROGRAM_SORT_OPTIONS.find((opt) => opt.value === filters.sort)?.label || "Urutkan";
@@ -117,59 +101,42 @@ export default function ProgramListPage() {
           {/* Bagian Bawah: Dibagi 2 (Kiri Urutkan, Kanan Tombol Filter) */}
           <div className="grid grid-cols-2 gap-2">
             {/* Bagian Kiri: Urutkan (px 12px, py 8px, Inter 14px, gap ke icon 16px, icon 24x24px) */}
-            <div ref={mobileSortRef} className="relative">
-              <button
-                type="button"
-                onClick={() => setIsSortOpen(!isSortOpen)}
-                className="w-full bg-white rounded-lg px-3 py-2 flex items-center justify-between text-[#17221F] cursor-pointer"
-              >
-                <span className="font-Inter text-[14px] truncate text-[#737373]">
-                  {filters.sort ? currentSortLabel : "Urutkan"}
-                </span>
-                <ChevronDown
-                  className={`w-6 h-6 text-[#737373] shrink-0 ml-4 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                    isSortOpen ? "rotate-180" : "rotate-0"
-                  }`}
-                />
-              </button>
-
-              {/* Dropdown Menu Sortir Mobile */}
-              <div
-                className={`absolute top-full left-0 mt-1.5 w-full bg-white rounded-lg shadow-xl border border-neutral-200/80 py-1.5 z-30 flex flex-col transform transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] origin-top ${
-                  isSortOpen
-                    ? "opacity-100 scale-100 translate-y-0 pointer-events-auto"
-                    : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
-                }`}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button
+                  type="button"
+                  className="w-full bg-white rounded-lg px-3 py-2 flex items-center justify-between text-[#17221F] cursor-pointer outline-none hover:bg-neutral-50 transition-colors group select-none"
+                >
+                  <span className="font-Inter text-[14px] truncate text-[#737373]">
+                    {filters.sort ? currentSortLabel : "Urutkan"}
+                  </span>
+                  <ChevronDown className="w-6 h-6 text-[#737373] shrink-0 ml-4 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-data-[state=open]:rotate-180" />
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent
+                align="start"
+                className="w-[calc(100vw-48px)] sm:w-[220px] bg-white rounded-xl shadow-xl border border-neutral-200/80 p-1.5 z-50"
               >
                 {PROGRAM_SORT_OPTIONS.map((opt) => {
                   const isSelected = filters.sort === opt.value;
                   return (
-                    <button
+                    <DropdownMenuItem
                       key={opt.value}
-                      type="button"
-                      onClick={() => {
-                        updateSort(opt.value);
-                        setIsSortOpen(false);
-                      }}
-                      className={`w-full flex items-center justify-between px-3.5 py-2.5 font-Inter text-[13px] transition-all duration-200 text-left ${
+                      onClick={() => updateSort(opt.value)}
+                      className={cn(
+                        "w-full flex items-center justify-between px-3.5 py-2.5 font-Inter text-[13px] rounded-lg cursor-pointer transition-colors text-left",
                         isSelected
                           ? "font-semibold text-[#176B5B] bg-[#DCEFE7]/50"
-                          : "text-[#17221F] hover:bg-neutral-100/70 hover:text-[#176B5B]"
-                      }`}
+                          : "text-[#17221F] hover:bg-neutral-100/70 hover:text-[#176B5B]",
+                      )}
                     >
                       <span>{opt.label}</span>
-                      <span
-                        className={`w-4 h-4 rounded-full flex items-center justify-center transition-all duration-200 ${
-                          isSelected ? "opacity-100 scale-100 text-[#176B5B]" : "opacity-0 scale-75"
-                        }`}
-                      >
-                        <Check className="w-3.5 h-3.5 stroke-[3]" />
-                      </span>
-                    </button>
+                      {isSelected && <Check className="w-4 h-4 text-[#176B5B] stroke-[2.5]" />}
+                    </DropdownMenuItem>
                   );
                 })}
-              </div>
-            </div>
+              </DropdownMenuContent>
+            </DropdownMenu>
 
             {/* Bagian Kanan: Tombol Filter (px 20px, py 10px, bg #F2C94C, Inter 14px 600 line 18px tracking -0.14px) */}
             <button
@@ -225,60 +192,42 @@ export default function ProgramListPage() {
               </div>
 
               {/* Sortir Dropdown Desktop */}
-              <div ref={sortRef} className="relative min-w-[210px]">
-                <button
-                  type="button"
-                  onClick={() => setIsSortOpen(!isSortOpen)}
-                  className="w-full bg-white rounded-lg px-3 py-2 flex items-center justify-between text-[#17221F] cursor-pointer"
-                >
-                  <span className="font-Inter text-[14px] text-[#737373] truncate">
-                    {filters.sort ? currentSortLabel : "Urutkan"}
-                  </span>
-                  <ChevronDown
-                    className={`w-5 h-5 text-[#737373] shrink-0 ml-2 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                      isSortOpen ? "rotate-180" : "rotate-0"
-                    }`}
-                  />
-                </button>
-
-                <div
-                  className={`absolute top-full right-0 mt-1.5 w-full bg-white rounded-lg shadow-xl border border-neutral-200/80 py-1.5 z-30 flex flex-col transform transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] origin-top ${
-                    isSortOpen
-                      ? "opacity-100 scale-100 translate-y-0 pointer-events-auto"
-                      : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
-                  }`}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <button
+                    type="button"
+                    className="min-w-[210px] bg-white rounded-lg px-3 py-2 flex items-center justify-between text-[#17221F] cursor-pointer outline-none hover:bg-neutral-50 transition-colors group select-none"
+                  >
+                    <span className="font-Inter text-[14px] text-[#737373] truncate">
+                      {filters.sort ? currentSortLabel : "Urutkan"}
+                    </span>
+                    <ChevronDown className="w-5 h-5 text-[#737373] shrink-0 ml-2 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-data-[state=open]:rotate-180" />
+                  </button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent
+                  align="end"
+                  className="w-[210px] bg-white rounded-xl shadow-xl border border-neutral-200/80 p-1.5 z-50"
                 >
                   {PROGRAM_SORT_OPTIONS.map((opt) => {
                     const isSelected = filters.sort === opt.value;
                     return (
-                      <button
+                      <DropdownMenuItem
                         key={opt.value}
-                        type="button"
-                        onClick={() => {
-                          updateSort(opt.value);
-                          setIsSortOpen(false);
-                        }}
-                        className={`w-full flex items-center justify-between px-3.5 py-2.5 font-Inter text-[13px] transition-all duration-200 text-left ${
+                        onClick={() => updateSort(opt.value)}
+                        className={cn(
+                          "w-full flex items-center justify-between px-3.5 py-2.5 font-Inter text-[13px] rounded-lg cursor-pointer transition-colors text-left",
                           isSelected
                             ? "font-semibold text-[#176B5B] bg-[#DCEFE7]/50"
-                            : "text-[#17221F] hover:bg-neutral-100/70 hover:text-[#176B5B]"
-                        }`}
+                            : "text-[#17221F] hover:bg-neutral-100/70 hover:text-[#176B5B]",
+                        )}
                       >
                         <span>{opt.label}</span>
-                        <span
-                          className={`w-4 h-4 rounded-full flex items-center justify-center transition-all duration-200 ${
-                            isSelected
-                              ? "opacity-100 scale-100 text-[#176B5B]"
-                              : "opacity-0 scale-75"
-                          }`}
-                        >
-                          <Check className="w-3.5 h-3.5 stroke-[3]" />
-                        </span>
-                      </button>
+                        {isSelected && <Check className="w-4 h-4 text-[#176B5B] stroke-[2.5]" />}
+                      </DropdownMenuItem>
                     );
                   })}
-                </div>
-              </div>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
 
             {/* PROGRAM LIST CONTAINER

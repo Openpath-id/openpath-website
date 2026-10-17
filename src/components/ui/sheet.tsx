@@ -18,11 +18,7 @@ const SheetOverlay = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof SheetPrimitive.Overlay>
 >(({ className, ...props }, ref) => (
   <SheetPrimitive.Overlay
-    className={cn(
-      "fixed inset-0 z-50 bg-black/60 backdrop-blur-[2px] transition-opacity duration-300",
-      "data-[state=open]:opacity-100 data-[state=closed]:opacity-0",
-      className,
-    )}
+    className={cn("fixed inset-0 z-50 bg-black/60 backdrop-blur-[2px] animate-fade", className)}
     {...props}
     ref={ref}
   />
@@ -42,15 +38,11 @@ const SheetContent = React.forwardRef<
     <SheetPrimitive.Content
       ref={ref}
       className={cn(
-        "fixed z-50 gap-4 bg-[#F7F7F2] p-6 shadow-2xl transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]",
-        side === "left" &&
-          "inset-y-0 left-0 h-full w-[85%] max-w-[340px] data-[state=closed]:-translate-x-full data-[state=open]:translate-x-0",
-        side === "right" &&
-          "inset-y-0 right-0 h-full w-[85%] max-w-[340px] data-[state=closed]:translate-x-full data-[state=open]:translate-x-0",
-        side === "bottom" &&
-          "inset-x-0 bottom-0 max-h-[85vh] data-[state=closed]:translate-y-full data-[state=open]:translate-y-0",
-        side === "top" &&
-          "inset-x-0 top-0 max-h-[85vh] data-[state=closed]:-translate-y-full data-[state=open]:translate-y-0",
+        "fixed z-50 gap-4 bg-[#F7F7F2] p-6 shadow-2xl animate-slide-left will-change-transform",
+        side === "left" && "inset-y-0 left-0 h-full w-[85%] max-w-[340px]",
+        side === "right" && "inset-y-0 right-0 h-full w-[85%] max-w-[340px]",
+        side === "bottom" && "inset-x-0 bottom-0 max-h-[85vh]",
+        side === "top" && "inset-x-0 top-0 max-h-[85vh]",
         className,
       )}
       {...props}
