@@ -33,7 +33,7 @@ export default function LoginPage() {
           style={{ width: "132px", height: "245.755px" }}
         >
           <Image
-            src="/images/auth/pintu.png"
+            src="/images/auth/pintu.webp"
             alt="Pintu Peluang Openpath"
             width={132}
             height={246}
@@ -68,7 +68,7 @@ export default function LoginPage() {
               }}
             >
               <Image
-                src="/images/auth/pintu.png"
+                src="/images/auth/pintu.webp"
                 alt="Pintu Peluang Openpath"
                 width={400}
                 height={744}
