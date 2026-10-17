@@ -424,7 +424,7 @@ export default function ProgramDetailClient({
                     </div>
 
                     <Link
-                      href="/cerita-aplikan"
+                      href={`/cerita-aplikan/${story.slug || story.id}`}
                       className="self-start inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#176B5B] hover:bg-[#125548] text-white text-[12px] font-semibold transition-colors mt-2"
                     >
                       <span>Lihat detail</span>
@@ -499,7 +499,7 @@ export default function ProgramDetailClient({
                     </div>
 
                     <Link
-                      href="/cerita-aplikan"
+                      href={`/cerita-aplikan/${currentMobileStory.slug || currentMobileStory.id}`}
                       className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-[#176B5B] hover:bg-[#125548] text-white text-[13px] font-semibold transition-colors mt-2"
                     >
                       <span>Lihat detail</span>

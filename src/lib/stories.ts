@@ -60,3 +60,36 @@ export const getInitialStories = cache(async (limit: number = 6): Promise<Applic
     return [];
   }
 });
+
+export const getStoryByIdOrSlug = cache(async (id: string): Promise<ApplicantStory | null> => {
+  if (!supabase) return null;
+
+  try {
+    // 1. Try finding by UUID / ID
+    const { data, error } = await supabase
+      .from("applicant_stories")
+      .select("*")
+      .eq("id", id)
+      .maybeSingle();
+
+    if (!error && data) {
+      return data as ApplicantStory;
+    }
+
+    // 2. Fallback: try by slug
+    const { data: dataSlug } = await supabase
+      .from("applicant_stories")
+      .select("*")
+      .eq("slug", id)
+      .maybeSingle();
+
+    if (dataSlug) {
+      return dataSlug as ApplicantStory;
+    }
+
+    return null;
+  } catch (err) {
+    console.error("Error fetching applicant story detail:", err);
+    return null;
+  }
+});
