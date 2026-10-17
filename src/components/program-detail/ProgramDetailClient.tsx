@@ -59,6 +59,14 @@ export default function ProgramDetailClient({ program: initialProgram }: Program
   const currentProgram = program || initialProgram;
   const currentMobileStory = stories[currentStoryIndex] || stories[0];
 
+  const handleBack = () => {
+    if (typeof window !== "undefined" && window.history.length > 1) {
+      router.back();
+    } else {
+      router.push("/list");
+    }
+  };
+
   return (
     <main className="w-full bg-[#F7F7F2] min-h-screen pt-[46px] pb-[51px] px-6 xl:pt-[84px] xl:pb-[77px] xl:px-[90px] flex justify-center">
       <div className="w-full max-w-[1260px] mx-auto flex flex-col gap-4 xl:gap-6">
@@ -71,7 +79,7 @@ export default function ProgramDetailClient({ program: initialProgram }: Program
           <div className="flex items-center gap-3">
             <button
               type="button"
-              onClick={() => router.push("/list")}
+              onClick={handleBack}
               className="w-10 h-10 rounded-[10px] bg-[#144737] hover:bg-[#0e3629] text-white flex items-center justify-center cursor-pointer transition-colors shadow-sm"
               aria-label="Kembali ke halaman list"
             >
