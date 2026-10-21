@@ -190,6 +190,9 @@ export function useAdminPrograms() {
     toggleSelectAll,
     isAllSelected,
     exportList,
+    updateProgramLocally: (updated: Program) => {
+      setPrograms((prev) => prev.map((p) => (p.id === updated.id ? { ...p, ...updated } : p)));
+    },
     refetch: fetchPrograms,
   };
 }
