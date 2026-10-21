@@ -193,6 +193,10 @@ export function useAdminPrograms() {
     updateProgramLocally: (updated: Program) => {
       setPrograms((prev) => prev.map((p) => (p.id === updated.id ? { ...p, ...updated } : p)));
     },
+    removeProgramLocally: (id: string) => {
+      setPrograms((prev) => prev.filter((p) => p.id !== id));
+      setTotalCount((prev) => Math.max(0, prev - 1));
+    },
     refetch: fetchPrograms,
   };
 }

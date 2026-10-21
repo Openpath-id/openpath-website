@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { toast } from "sonner";
 import { Program } from "@/types/program";
 import { useAdminPrograms } from "@/hooks/useAdminPrograms";
+import { useDeleteProgram } from "@/hooks/useDeleteProgram";
 import AdminHeader from "@/components/admin/AdminHeader";
 import AdminStatCards from "@/components/admin/AdminStatCards";
 import AdminFilters from "@/components/admin/AdminFilters";
@@ -11,10 +11,12 @@ import AdminTable from "@/components/admin/AdminTable";
 import AdminPagination from "@/components/admin/AdminPagination";
 import EditProgramDrawer from "@/components/admin/EditProgramDrawer";
 import CreateProgramDrawer from "@/components/admin/CreateProgramDrawer";
+import DeleteProgramDialog from "@/components/admin/DeleteProgramDialog";
 
 export default function AdminListingPage() {
   const [editingProgram, setEditingProgram] = useState<Program | null>(null);
   const [isCreateOpen, setIsCreateOpen] = useState(false);
+
   const isEditOpen = Boolean(editingProgram);
   const isDrawerOpen = isEditOpen || isCreateOpen;
 
@@ -42,8 +44,23 @@ export default function AdminListingPage() {
     isAllSelected,
     exportList,
     updateProgramLocally,
+    removeProgramLocally,
     refetch,
   } = useAdminPrograms();
+
+  const {
+    programToDelete,
+    isDeleting,
+    isDeleteDialogOpen,
+    requestDelete,
+    cancelDelete,
+    confirmDelete,
+  } = useDeleteProgram({
+    onSuccess: (deleted) => {
+      removeProgramLocally(deleted.id);
+      refetch();
+    },
+  });
 
   const handleEdit = (program: Program) => {
     setEditingProgram(program);
@@ -56,18 +73,6 @@ export default function AdminListingPage() {
 
   const handleCreateSuccess = () => {
     refetch();
-  };
-
-  const handleDelete = (program: Program) => {
-    toast.error("Konfirmasi Hapus", {
-      description: `Program "${program.name}" akan dihapus.`,
-      action: {
-        label: "Hapus",
-        onClick: () => {
-          toast.success("Program berhasil dihapus");
-        },
-      },
-    });
   };
 
   return (
@@ -110,7 +115,7 @@ export default function AdminListingPage() {
           onToggleSelectAll={toggleSelectAll}
           onToggleRow={toggleRow}
           onEdit={handleEdit}
-          onDelete={handleDelete}
+          onDelete={requestDelete}
         />
 
         {/* 5. Pagination */}
@@ -130,6 +135,15 @@ export default function AdminListingPage() {
         isOpen={isCreateOpen}
         onClose={() => setIsCreateOpen(false)}
         onSuccess={handleCreateSuccess}
+      />
+
+      {/* 8. Delete Confirmation Modal (Shadcn Dialog) */}
+      <DeleteProgramDialog
+        program={programToDelete}
+        isOpen={isDeleteDialogOpen}
+        isDeleting={isDeleting}
+        onClose={cancelDelete}
+        onConfirm={confirmDelete}
       />
     </>
   );
