@@ -76,14 +76,14 @@ export default function StoryDetailClient({ story: initialStory }: StoryDetailCl
                       href="/cerita-aplikan"
                       className="text-[#737373] hover:text-[#17221F] transition-colors"
                     >
-                      Listing
+                      Cerita
                     </Link>
                   </BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator className="text-[#737373]">&gt;</BreadcrumbSeparator>
                 <BreadcrumbItem>
                   <BreadcrumbPage className="font-Sora text-[16px] font-semibold text-[#176B5B]">
-                    Detail Listing
+                    Detail Cerita
                   </BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
@@ -99,14 +99,14 @@ export default function StoryDetailClient({ story: initialStory }: StoryDetailCl
                     href="/cerita-aplikan"
                     className="font-Sora text-[16px] font-semibold text-[#737373] hover:text-[#17221F] transition-colors"
                   >
-                    Listing
+                    Cerita
                   </Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator className="text-[#737373]">&gt;</BreadcrumbSeparator>
               <BreadcrumbItem>
                 <BreadcrumbPage className="font-Sora text-[16px] font-semibold text-[#176B5B]">
-                  Detail Listing
+                  Detail Cerita
                 </BreadcrumbPage>
               </BreadcrumbItem>
             </BreadcrumbList>
