@@ -14,6 +14,9 @@ import {
   ChevronLeft,
   ChevronRight,
   Loader2,
+  FileBadge,
+  BadgeX,
+  CalendarCheck2,
 } from "lucide-react";
 import { useAdminPrograms } from "@/hooks/useAdminPrograms";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -106,7 +109,7 @@ export default function AdminListingPage() {
       {/* ========================================================================= */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-8">
         {/* Card 1: Beasiswa Pendidikan */}
-        <div className="bg-[#134F40] rounded-[16px] p-6 flex flex-col justify-between shadow-sm min-h-[140px] transition-all hover:shadow-md">
+        <div className="bg-[#176B5B] rounded-[16px] p-6 flex flex-col justify-between shadow-sm min-h-[140px] transition-all hover:shadow-md">
           <div className="flex items-start justify-between">
             <span className="font-semibold text-[15px] text-white leading-snug max-w-[120px]">
               Beasiswa
@@ -126,14 +129,14 @@ export default function AdminListingPage() {
         </div>
 
         {/* Card 2: Pendanaan Sertifikasi */}
-        <div className="bg-[#134F40] rounded-[16px] p-6 flex flex-col justify-between shadow-sm min-h-[140px] transition-all hover:shadow-md">
+        <div className="bg-[#176B5B] rounded-[16px] p-6 flex flex-col justify-between shadow-sm min-h-[140px] transition-all hover:shadow-md">
           <div className="flex items-start justify-between">
             <span className="font-semibold text-[15px] text-white leading-snug max-w-[120px]">
               Pendanaan
               <br />
               Sertifikasi
             </span>
-            <Award className="w-8 h-8 text-white stroke-[1.8] shrink-0" />
+            <FileBadge className="w-8 h-8 text-white stroke-[1.8] shrink-0" />
           </div>
           <div className="mt-4">
             <span
@@ -146,14 +149,14 @@ export default function AdminListingPage() {
         </div>
 
         {/* Card 3: Masih Aktif */}
-        <div className="bg-[#134F40] rounded-[16px] p-6 flex flex-col justify-between shadow-sm min-h-[140px] transition-all hover:shadow-md">
+        <div className="bg-[#176B5B] rounded-[16px] p-6 flex flex-col justify-between shadow-sm min-h-[140px] transition-all hover:shadow-md">
           <div className="flex items-start justify-between">
             <span className="font-semibold text-[15px] text-white leading-snug max-w-[120px]">
               Masih
               <br />
               Aktif
             </span>
-            <CalendarCheck className="w-8 h-8 text-white stroke-[1.8] shrink-0" />
+            <CalendarCheck2 className="w-8 h-8 text-white stroke-[1.8] shrink-0" />
           </div>
           <div className="mt-4">
             <span
@@ -166,14 +169,14 @@ export default function AdminListingPage() {
         </div>
 
         {/* Card 4: Belum Terverifikasi */}
-        <div className="bg-[#134F40] rounded-[16px] p-6 flex flex-col justify-between shadow-sm min-h-[140px] transition-all hover:shadow-md">
+        <div className="bg-[#176B5B] rounded-[16px] p-6 flex flex-col justify-between shadow-sm min-h-[140px] transition-all hover:shadow-md">
           <div className="flex items-start justify-between">
             <span className="font-semibold text-[15px] text-white leading-snug max-w-[120px]">
               Belum
               <br />
               Terverifikasi
             </span>
-            <ShieldAlert className="w-8 h-8 text-white stroke-[1.8] shrink-0" />
+            <BadgeX className="w-8 h-8 text-white stroke-[1.8] shrink-0" />
           </div>
           <div className="mt-4">
             <span
@@ -208,7 +211,7 @@ export default function AdminListingPage() {
           <button
             type="button"
             onClick={exportList}
-            className="h-[46px] px-5 rounded-[10px] border border-[#176B5B] text-[#176B5B] bg-white hover:bg-[#DCEFE7]/30 active:scale-[0.99] font-semibold text-[14px] flex items-center justify-center gap-2 cursor-pointer transition-all whitespace-nowrap shrink-0 shadow-sm"
+            className="h-[46px] px-5 rounded-[10px] border-2 border-[#176B5B] text-[#176B5B] bg-white hover:bg-[#DCEFE7]/30 active:scale-[0.99] font-semibold text-[14px] flex items-center justify-center gap-2 cursor-pointer transition-all whitespace-nowrap shrink-0 shadow-sm"
           >
             <Download className="w-4 h-4" />
             <span>Ekspor List</span>
