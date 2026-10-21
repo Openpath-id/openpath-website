@@ -23,7 +23,7 @@ export default function ErrorPageLayout({
   return (
     <div className="relative w-full overflow-hidden bg-white flex flex-col items-center justify-between min-h-[calc(100vh-90px)]">
       {/* Text & Button Container */}
-      <div className="relative z-10 w-full flex flex-col items-center text-center pt-[180px] pb-[380px] px-6 md:px-16 md:pt-[200px] md:pb-[480px] lg:px-[120px] 2xl:px-[300px] 2xl:pt-[190px] 2xl:pb-[680px]">
+      <div className="relative z-10 w-full flex flex-col items-center text-center pt-[130px] pb-[240px] px-6 md:px-16 md:pt-[150px] md:pb-[280px] lg:px-[120px] lg:pt-[170px] lg:pb-[320px] 2xl:px-[300px] 2xl:pt-[180px] 2xl:pb-[360px]">
         {/* Texts & Button Wrapper: gap 32px */}
         <div className="flex flex-col items-center gap-8 max-w-[840px]">
           {/* Texts Section */}

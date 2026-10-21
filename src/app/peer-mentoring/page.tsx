@@ -7,7 +7,7 @@ export default function PeerMentoringPage() {
   return (
     <div className="relative w-full overflow-hidden bg-white flex flex-col items-center justify-between min-h-[calc(100vh-90px)]">
       {/* Text & Button Container */}
-      <div className="relative z-10 w-full flex flex-col items-center text-center pt-[245px] pb-[413px] px-6 md:px-16 md:pt-[230px] md:pb-[520px] lg:px-[120px] 2xl:px-[300px] 2xl:pt-[221px] 2xl:pb-[723px]">
+      <div className="relative z-10 w-full flex flex-col items-center text-center pt-[140px] pb-[260px] px-6 md:px-16 md:pt-[160px] md:pb-[300px] lg:px-[120px] lg:pt-[180px] lg:pb-[340px] 2xl:px-[300px] 2xl:pt-[190px] 2xl:pb-[380px]">
         {/* Texts & Button Wrapper: gap 32px */}
         <div className="flex flex-col items-center gap-8 max-w-[840px]">
           {/* Texts Section: gap 8px on mobile, gap 16px on desktop */}
@@ -32,7 +32,7 @@ export default function PeerMentoringPage() {
 
           {/* Action Button: gap to arrow right 10px */}
           <Link
-            href="/listing"
+            href="/list"
             className="inline-flex items-center gap-[10px] bg-[#176B5B] hover:bg-[#145d4f] active:scale-95 transition-all text-white px-5 py-[10px] lg:px-6 lg:py-3 rounded-[8px] font-Inter text-[14px] lg:text-[16px] font-semibold leading-[18px] lg:tracking-[-0.16px] shadow-md"
           >
             <span>Listing Beasiswa &amp; Sertifikasi</span>
