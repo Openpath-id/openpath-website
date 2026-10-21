@@ -20,7 +20,10 @@ export default function NearestDeadlines() {
   ];
 
   return (
-    <section className="w-full bg-[#F7F7F2] py-[62px] px-6 xl:px-[90px] xl:pt-[128px] xl:pb-[85px] flex justify-center">
+    <section
+      id="neardeadline"
+      className="w-full bg-[#F7F7F2] py-[62px] px-6 xl:px-[90px] xl:pt-[128px] xl:pb-[85px] flex justify-center scroll-mt-6"
+    >
       <div className="w-full max-w-[1260px] mx-auto rounded-[14px] overflow-hidden flex flex-col shadow-2xl">
         {/* Top Header Bar: 
             Mobile: background #17221F, height default/auto (padded), 3 ellipses 16x16px with gap 8px

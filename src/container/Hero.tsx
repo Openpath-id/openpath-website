@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import Typography from "@/components/Typography";
 import { TARGET_AUDIENCE_CARDS } from "@/data/hero";
@@ -58,13 +57,13 @@ export default function Hero() {
             </p>
 
             {/* Action Button */}
-            <Link
-              href="/list"
+            <a
+              href="#neardeadline"
               className="mt-12 md:mt-14 lg:mt-[60px] inline-flex items-center gap-[10px] bg-[#176B5B] hover:bg-[#145d4f] active:scale-95 transition-all text-white px-5 py-[10px] md:px-6 md:py-3 rounded-[8px] font-Inter text-[14px] md:text-[15px] lg:text-[16px] font-semibold shadow-md"
             >
               <span>Lihat Beasiswa &amp; Sertifikasi Terdekat</span>
               <ArrowRight className="w-5 h-5 lg:w-6 lg:h-6 shrink-0" />
-            </Link>
+            </a>
           </div>
         </div>
       </section>
