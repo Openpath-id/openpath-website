@@ -15,6 +15,7 @@ interface AdminFiltersProps {
   sort: string;
   setSort: (val: string) => void;
   onExport: () => void;
+  onAddListing?: () => void;
 }
 
 export default function AdminFilters({
@@ -29,6 +30,7 @@ export default function AdminFilters({
   sort,
   setSort,
   onExport,
+  onAddListing,
 }: AdminFiltersProps) {
   return (
     <div className="bg-white rounded-[16px] p-5 md:p-6 shadow-sm border border-neutral-200/80 mt-8 flex flex-col gap-4">
@@ -59,10 +61,12 @@ export default function AdminFilters({
         {/* Button Tambah Listing Baru */}
         <button
           type="button"
-          onClick={() =>
-            toast.info("Tambah Listing", {
-              description: "Formulir penambahan program baru.",
-            })
+          onClick={
+            onAddListing ||
+            (() =>
+              toast.info("Tambah Listing", {
+                description: "Formulir penambahan program baru.",
+              }))
           }
           className="h-[46px] px-5 rounded-[10px] bg-[#176B5B] hover:bg-[#125548] active:scale-[0.99] text-white font-semibold text-[14px] flex items-center justify-center gap-2 cursor-pointer transition-all whitespace-nowrap shrink-0 shadow-sm"
         >

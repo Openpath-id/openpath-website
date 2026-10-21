@@ -10,10 +10,13 @@ import AdminFilters from "@/components/admin/AdminFilters";
 import AdminTable from "@/components/admin/AdminTable";
 import AdminPagination from "@/components/admin/AdminPagination";
 import EditProgramDrawer from "@/components/admin/EditProgramDrawer";
+import CreateProgramDrawer from "@/components/admin/CreateProgramDrawer";
 
 export default function AdminListingPage() {
   const [editingProgram, setEditingProgram] = useState<Program | null>(null);
+  const [isCreateOpen, setIsCreateOpen] = useState(false);
   const isEditOpen = Boolean(editingProgram);
+  const isDrawerOpen = isEditOpen || isCreateOpen;
 
   const {
     programs,
@@ -51,6 +54,10 @@ export default function AdminListingPage() {
     refetch();
   };
 
+  const handleCreateSuccess = () => {
+    refetch();
+  };
+
   const handleDelete = (program: Program) => {
     toast.error("Konfirmasi Hapus", {
       description: `Program "${program.name}" akan dihapus.`,
@@ -67,7 +74,7 @@ export default function AdminListingPage() {
     <>
       <div
         className={`w-full flex flex-col pt-6 px-4 pb-8 lg:pt-[94px] lg:pr-[61px] lg:pb-[36px] lg:pl-[48px] transition-opacity duration-300 ${
-          isEditOpen ? "opacity-35 pointer-events-none select-none" : "opacity-100"
+          isDrawerOpen ? "opacity-35 pointer-events-none select-none" : "opacity-100"
         }`}
         style={{ fontFamily: "var(--font-Inter), Inter, sans-serif" }}
       >
@@ -90,6 +97,7 @@ export default function AdminListingPage() {
           sort={sort}
           setSort={setSort}
           onExport={exportList}
+          onAddListing={() => setIsCreateOpen(true)}
         />
 
         {/* 4. Data Table */}
@@ -115,6 +123,13 @@ export default function AdminListingPage() {
         isOpen={isEditOpen}
         onClose={() => setEditingProgram(null)}
         onSuccess={handleSaveSuccess}
+      />
+
+      {/* 7. Create Program Slide-over Drawer */}
+      <CreateProgramDrawer
+        isOpen={isCreateOpen}
+        onClose={() => setIsCreateOpen(false)}
+        onSuccess={handleCreateSuccess}
       />
     </>
   );
