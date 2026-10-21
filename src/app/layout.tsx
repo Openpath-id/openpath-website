@@ -14,7 +14,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={cn(Sora.variable, Inter.variable, "scroll-smooth")}>
+    <html
+      lang="en"
+      data-scroll-behavior="smooth"
+      className={cn(Sora.variable, Inter.variable, "scroll-smooth")}
+    >
       <body className={cn(Sora.variable, Inter.variable, "min-h-screen flex flex-col")}>
         <Navbar />
         <div className="flex-1 flex flex-col">{children}</div>
