@@ -2,7 +2,10 @@ import type { MetadataRoute } from "next";
 import { supabase } from "@/lib/supabase";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.openpath.my.id/";
+  const baseUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.openpath.my.id").replace(
+    /\/$/,
+    "",
+  );
 
   // Static Pages
   const staticRoutes: MetadataRoute.Sitemap = [

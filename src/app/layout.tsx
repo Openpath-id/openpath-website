@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 import { Inter, Sora } from "@/lib/font";
 import { cn } from "@/lib/utils";
@@ -24,6 +25,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div className="flex-1 flex flex-col">{children}</div>
         <Footer />
         <Toaster />
+
+        <Script
+          strategy="afterInteractive"
+          src="https://www.googletagmanager.com/gtag/js?id=G-F7Z8QD9B7R"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-F7Z8QD9B7R');
+          `}
+        </Script>
       </body>
     </html>
   );
