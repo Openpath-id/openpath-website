@@ -67,10 +67,23 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
+    if (!data) {
+      console.warn(
+        "Supabase update: 0 baris diperbarui. Hal ini disebabkan oleh Row Level Security (RLS) pada tabel programs.",
+      );
+      return NextResponse.json(
+        {
+          error:
+            "Database Supabase menolak update (0 baris terpengaruh karena RLS). Masukkan SUPABASE_SERVICE_ROLE_KEY di .env atau izinkan UPDATE policy di dashboard Supabase.",
+        },
+        { status: 403 },
+      );
+    }
+
     return NextResponse.json({
       success: true,
       message: "Program berhasil diperbarui",
-      program: data || { id, ...updateData },
+      program: data,
     });
   } catch (err: unknown) {
     console.error("Update program API error:", err);
