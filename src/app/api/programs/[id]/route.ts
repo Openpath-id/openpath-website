@@ -93,3 +93,53 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
     );
   }
 }
+
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> },
+) {
+  const { id } = await params;
+
+  try {
+    if (!id) {
+      return NextResponse.json({ error: "ID Program tidak valid" }, { status: 400 });
+    }
+
+    const { supabase } = await import("@/lib/supabase");
+    if (!supabase) {
+      return NextResponse.json({ error: "Koneksi Supabase tidak ditemukan" }, { status: 500 });
+    }
+
+    const { data, error } = await supabase
+      .from("programs")
+      .delete()
+      .eq("id", id)
+      .select()
+      .maybeSingle();
+
+    if (error) {
+      console.error("Supabase delete error:", error);
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+
+    if (!data) {
+      console.warn("Supabase delete: 0 baris dihapus atau program tidak ditemukan.");
+      return NextResponse.json(
+        { error: "Program tidak ditemukan atau gagal dihapus dari database" },
+        { status: 404 },
+      );
+    }
+
+    return NextResponse.json({
+      success: true,
+      message: "Program berhasil dihapus",
+      deletedProgram: data,
+    });
+  } catch (err: unknown) {
+    console.error("Delete program API error:", err);
+    return NextResponse.json(
+      { error: err instanceof Error ? err.message : "Terjadi kesalahan internal" },
+      { status: 500 },
+    );
+  }
+}
