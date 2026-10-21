@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { Program } from "@/types/program";
 import { toast } from "sonner";
+import { useDebounce } from "@/lib/useDebounce";
 
 export interface AdminProgramCounts {
   beasiswa: number;
@@ -34,6 +35,9 @@ export function useAdminPrograms() {
 
   // Filters
   const [search, setSearch] = useState("");
+  // Debounce input pencarian selama 400ms agar tidak memicu fetch berlebihan di setiap ketikan
+  const debouncedSearch = useDebounce(search, 400);
+
   const [type, setType] = useState("all");
   const [educationLevel, setEducationLevel] = useState("all");
   const [verification, setVerification] = useState("all");
@@ -52,7 +56,7 @@ export function useAdminPrograms() {
         page: page.toString(),
         limit: limit.toString(),
       });
-      if (search.trim()) params.append("search", search.trim());
+      if (debouncedSearch.trim()) params.append("search", debouncedSearch.trim());
       if (type !== "all") params.append("type", type);
       if (educationLevel !== "all") params.append("education_level", educationLevel);
       if (verification !== "all") params.append("verification", verification);
@@ -74,7 +78,7 @@ export function useAdminPrograms() {
     } finally {
       setLoading(false);
     }
-  }, [page, limit, search, type, educationLevel, verification, sort]);
+  }, [page, limit, debouncedSearch, type, educationLevel, verification, sort]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
