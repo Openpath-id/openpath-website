@@ -1,0 +1,66 @@
+# Openpath.id — Dokumentasi Lengkap
+
+> Openpath.id adalah platform kurasi informasi beasiswa perguruan tinggi dan pendanaan sertifikasi profesional gratis untuk mahasiswa Indonesia, lahir dari inisiatif Departemen Hubungan Luar Himatektro ITS dan didukung oleh BEM FSAD ITS.
+
+## Tentang Openpath.id
+
+Openpath didirikan untuk menjawab tantangan fragmentasi informasi beasiswa dan pendanaan pengembangan diri bagi mahasiswa. Seringkali informasi peluang akademik tersebar di berbagai saluran tidak resmi dengan batas waktu yang mendadak. 
+
+Openpath hadir sebagai wadah terpusat dan terpercaya dengan kurasi data berkala, mencakup:
+1. **Beasiswa Kuliah**: Bantuan SPP/UKT, uang saku bulanan, program pembinaan, dan ikatan dinas dari instansi pemerintah, BUMN, maupun yayasan swasta.
+2. **Pendanaan Sertifikasi**: Dukungan biaya ujian sertifikasi keahlian berstandar internasional (misalnya AWS, Google Cloud, dsb) untuk meningkatkan daya saing mahasiswa di pasar kerja.
+3. **Cerita Aplikan**: Dokumentasi pengalaman nyata para awardee mengenai penulisan esai, persiapan berkas administratif, wawancara, serta kontribusi sosial.
+4. **Peer Mentoring**: Layanan konsultasi langsung dan review berkas 1-on-1 bersama mahasiswa senior dan awardee beasiswa.
+
+---
+
+## Layanan Utama
+
+### 1. Direktori Beasiswa & Sertifikasi (/list)
+- **URL**: https://www.openpath.my.id/list
+- **Deskripsi**: Menampilkan puluhan program beasiswa dan sertifikasi aktif. Pengguna dapat memfilter berdasarkan kategori (Semua, Beasiswa Kuliah, Pendanaan Sertifikasi), jenjang studi (D3, D4, S1, S2), cakupan pembiayaan (Penuh/Sebagian), serta batas waktu pendaftaran (deadline).
+- **Fitur Khusus**:
+  - Penghitung mundur waktu (deadline countdown).
+  - Tanda verifikasi kurasi tim Openpath.
+  - Tautan langsung ke portal pendaftaran resmi penyelenggara.
+
+### 2. Cerita Aplikan (/cerita-aplikan)
+- **URL**: https://www.openpath.my.id/cerita-aplikan
+- **Deskripsi**: Kolom artikel reflektif dan edukatif dari awardee terpilih untuk membantu calon pendaftar memahami ekspektasi juri seleksi.
+- **Topik Pembahasan**:
+  - Struktur dan kerangka penulisan esai beasiswa (personal statement, study plan, motivation letter).
+  - Strategi menjawab pertanyaan kritis dalam seleksi wawancara.
+  - Tips membangun profil akademik dan portofolio kegiatan kepemimpinan.
+
+### 3. Layanan Peer Mentoring (/peer-mentoring)
+- **URL**: https://www.openpath.my.id/peer-mentoring
+- **Deskripsi**: Program bimbingan personal satu lawan satu (1-on-1) antara calon aplikan dan awardee beasiswa berpengalaman.
+- **Fokus Pendampingan**:
+  - Review esai dan CV ATS-friendly.
+  - Diskusi strategi pemetaan beasiswa yang cocok dengan profil mahasiswa.
+  - Mock interview dan feedback konstruktif sebelum menghadapi tim penyeleksi resmi.
+
+---
+
+## Arsip Cerita Aplikan
+
+### Bukan Sekadar IPK: Kiat Lolos Beasiswa Bank Indonesia dan Bergabung dengan GenBI
+- **Penulis**: Khansa Peridhia Naura (Awardee Beasiswa Bank Indonesia 2025–2026, Aktuaria ITS)
+- **URL**: https://www.openpath.my.id/cerita-aplikan/kiat-lolos-beasiswa-bank-indonesia-genbi
+- **Ringkasan**: Menjelaskan kriteria penilaian Beasiswa Bank Indonesia yang tidak hanya menitikberatkan pada IPK, tetapi juga kontribusi sosial serta kesiapan berpartisipasi aktif dalam kegiatan Generasi Baru Indonesia (GenBI).
+
+### Menembus Beasiswa Pertamina Sobat Bumi: Dari Gagasan Aksi hingga Lolos Wawancara
+- **Penulis**: Nabila Putri Salsabila (Awardee Beasiswa Pertamina Sobat Bumi 2025, Teknik Lingkungan ITS)
+- **URL**: https://www.openpath.my.id/cerita-aplikan/menembus-beasiswa-pertamina-sobat-bumi
+- **Ringkasan**: Membagikan strategi menyusun esai bertema pelestarian lingkungan hidup dan energi hijau, tips verifikasi berkas, dan penyusunan action plan yang dinilai oleh Pertamina Foundation.
+
+### Strategi Lolos Beasiswa Karya Salemba Empat (KSE): Dari Berkas hingga Esai
+- **Penulis**: Kevin Jonathan (Awardee Beasiswa Karya Salemba Empat 2025, Teknik Elektro ITS)
+- **URL**: https://www.openpath.my.id/cerita-aplikan/strategi-tembus-beasiswa-karya-salemba-empat-kse
+- **Ringkasan**: Ulasan komprehensif mengenai penulisan esai finansial dan kontribusi pengembangan diri yang dibutuhkan oleh Yayasan Karya Salemba Empat.
+
+---
+
+## Kontak & Inisiator
+- **Website**: https://www.openpath.my.id
+- **Pengembang & Inisiator**: Departemen Hubungan Luar Himatektro ITS & BEM Fakultas Sains dan Analitika Data (FSAD) Institut Teknologi Sepuluh Nopember Surabaya.

@@ -1,0 +1,29 @@
+# Openpath.id
+
+> Openpath.id adalah platform kurasi informasi beasiswa perguruan tinggi dan pendanaan sertifikasi profesional gratis untuk mahasiswa Indonesia, lahir dari inisiatif Departemen Hubungan Luar Himatektro ITS dan didukung oleh BEM FSAD ITS.
+
+Openpath.id bertujuan membuka akses peluang pendidikan tinggi dan pengembangan keterampilan profesional secara transparan, terstruktur, dan mudah diakses. Platform ini menyediakan direktori beasiswa terverifikasi, artikel inspiratif cerita aplikan, serta layanan peer mentoring 1-on-1 bersama awardee berprestasi.
+
+## Halaman Utama & Layanan
+
+- [Beranda Openpath](https://www.openpath.my.id/): Portal utama direktori beasiswa terkurasi, deadline terdekat, dan program mentorship.
+- [Direktori Beasiswa & Sertifikasi](https://www.openpath.my.id/list): Direktori lengkap beasiswa aktif, bantuan dana pendidikan, dan pendanaan sertifikasi profesional dengan filter kategori, jenjang, dan deadline.
+- [Cerita Aplikan](https://www.openpath.my.id/cerita-aplikan): Kumpulan kisah nyata, kiat lolos, strategi esai, dan panduan wawancara dari para awardee beasiswa terkemuka.
+- [Peer Mentoring](https://www.openpath.my.id/peer-mentoring): Layanan konsultasi dan bimbingan 1-on-1 bersama mentor mahasiswa berprestasi untuk review CV, essay beasiswa, dan simulasi wawancara.
+
+## Cerita Aplikan Unggulan
+
+- [Kiat Lolos Beasiswa Bank Indonesia & GenBI](https://www.openpath.my.id/cerita-aplikan/kiat-lolos-beasiswa-bank-indonesia-genbi): Pengalaman Khansa Peridhia Naura (Aktuaria ITS) dalam menembus Beasiswa BI dan peran aktif di komunitas GenBI.
+- [Strategi Tembus Beasiswa Karya Salemba Empat (KSE)](https://www.openpath.my.id/cerita-aplikan/strategi-tembus-beasiswa-karya-salemba-empat-kse): Panduan menulis esai dan persiapan seleksi Beasiswa KSE oleh Kevin Jonathan (Teknik Elektro ITS).
+- [Menembus Beasiswa Pertamina Sobat Bumi](https://www.openpath.my.id/cerita-aplikan/menembus-beasiswa-pertamina-sobat-bumi): Kisah Nabila Putri Salsabila (Teknik Lingkungan ITS) merancang proposal proyek aksi lingkungan dan seleksi wawancara.
+
+## Program Populer
+
+- [Beasiswa Pertamina Sobat Bumi](https://www.openpath.my.id/list/beasiswa-pertamina-sobat-bumi): Bantuan biaya pendidikan, uang saku bulanan, dan pendanaan aksi peduli lingkungan.
+- [Beasiswa Unggulan Kemendikbud](https://www.openpath.my.id/list/beasiswa-unggulan-kemendikbud): Beasiswa gelar penuh (full degree) jenjang Sarjana, Magister, dan Doktoral bagi mahasiswa berprestasi.
+- [Djarum Beasiswa Plus](https://www.openpath.my.id/list/djarum-beasiswa-plus): Dana beasiswa 1 tahun dan program pelatihan soft skills serta kepemimpinan intensif.
+
+## Optional
+
+- [Versi Dokumen Lengkap (llms-full.txt)](https://www.openpath.my.id/llms-full.txt): Ringkasan komprehensif seluruh konten dan dokumentasi platform Openpath untuk LLM context ingestion.
+- [Sitemap XML](https://www.openpath.my.id/sitemap.xml): Peta situs format XML standar mesin perayap dan agen web.
