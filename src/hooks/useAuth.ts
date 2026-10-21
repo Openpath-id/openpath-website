@@ -125,7 +125,7 @@ export function useAuth() {
 
       // Toast Success
       toast.success("Login Berhasil!", {
-        description: "Selamat datang kembali di OpenPath Admin.",
+        description: "Selamat datang kembali di Admin Panel.",
       });
 
       // Redirect to admin dashboard
