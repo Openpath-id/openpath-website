@@ -6,9 +6,24 @@ export async function POST() {
     if (supabase) {
       await supabase.auth.signOut();
     }
-    return NextResponse.json({ success: true, message: "Logout berhasil" });
   } catch (err: unknown) {
     console.error("Logout API error:", err);
-    return NextResponse.json({ success: true });
   }
+
+  const response = NextResponse.json({ success: true, message: "Logout berhasil" });
+
+  // Clear session cookies
+  response.cookies.set("openpath_session", "", {
+    httpOnly: true,
+    maxAge: 0,
+    path: "/",
+  });
+
+  response.cookies.set("openpath_session_expires", "", {
+    httpOnly: false,
+    maxAge: 0,
+    path: "/",
+  });
+
+  return response;
 }

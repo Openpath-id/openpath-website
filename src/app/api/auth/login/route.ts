@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
 import { loginSchema } from "@/app/validation";
 
+const SIX_HOURS_IN_SECONDS = 6 * 60 * 60; // 21,600 seconds (6 hours)
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
@@ -41,7 +43,9 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Pengguna tidak ditemukan" }, { status: 404 });
     }
 
-    return NextResponse.json({
+    const expiresAt = Date.now() + SIX_HOURS_IN_SECONDS * 1000;
+
+    const response = NextResponse.json({
       success: true,
       message: "Login berhasil",
       user: {
@@ -50,7 +54,28 @@ export async function POST(request: NextRequest) {
         role: user.user_metadata?.role || "admin",
       },
       session: data.session,
+      expiresAt,
     });
+
+    // 1. Session Token Cookie for Next.js Middleware (httpOnly, 6 hours)
+    response.cookies.set("openpath_session", data.session?.access_token || "authenticated", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      maxAge: SIX_HOURS_IN_SECONDS,
+      path: "/",
+    });
+
+    // 2. Expiry Timestamp Cookie (accessible to client for timer synchronization)
+    response.cookies.set("openpath_session_expires", String(expiresAt), {
+      httpOnly: false,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      maxAge: SIX_HOURS_IN_SECONDS,
+      path: "/",
+    });
+
+    return response;
   } catch (err: unknown) {
     console.error("Login API error:", err);
     return NextResponse.json(

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { loginSchema } from "@/app/validation";
@@ -24,6 +24,37 @@ export function useAuth() {
     role?: string;
   } | null>(null);
 
+  const handleLogout = useCallback(
+    async (isAuto = false) => {
+      try {
+        await fetch("/api/auth/logout", { method: "POST" });
+      } catch {
+        // ignore network errors on logout
+      }
+
+      if (typeof window !== "undefined") {
+        localStorage.removeItem("openpath_access_token");
+        localStorage.removeItem("openpath_user");
+        localStorage.removeItem("openpath_session_expires");
+      }
+
+      setCurrentUser(null);
+
+      if (isAuto) {
+        toast.warning("Sesi Berakhir", {
+          description: "Sesi admin Anda telah berakhir. Silakan login kembali.",
+        });
+      } else {
+        toast.success("Berhasil Keluar", {
+          description: "Anda telah keluar dari akun admin.",
+        });
+      }
+
+      router.push("/login");
+    },
+    [router],
+  );
+
   useEffect(() => {
     // Check if there is a remembered email & user
     const timer = setTimeout(() => {
@@ -40,29 +71,27 @@ export function useAuth() {
           // ignore json parse error
         }
       }
+
+      // Check session expiry (6 hours)
+      const expiresStr = localStorage.getItem("openpath_session_expires");
+      if (expiresStr) {
+        const expires = Number(expiresStr);
+        const now = Date.now();
+        if (now >= expires) {
+          handleLogout(true);
+        } else {
+          // Set timer for auto logout when remaining 6-hour time expires
+          const remainingTime = expires - now;
+          const autoLogoutTimer = setTimeout(() => {
+            handleLogout(true);
+          }, remainingTime);
+          return () => clearTimeout(autoLogoutTimer);
+        }
+      }
     }, 0);
 
     return () => clearTimeout(timer);
-  }, []);
-
-  const handleLogout = async () => {
-    try {
-      await fetch("/api/auth/logout", { method: "POST" });
-    } catch {
-      // ignore network errors on logout
-    }
-
-    if (typeof window !== "undefined") {
-      localStorage.removeItem("openpath_access_token");
-      localStorage.removeItem("openpath_user");
-    }
-
-    setCurrentUser(null);
-    toast.success("Berhasil Keluar", {
-      description: "Anda telah keluar dari akun admin.",
-    });
-    router.push("/login");
-  };
+  }, [handleLogout]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -105,7 +134,7 @@ export function useAuth() {
         throw new Error(data.error || "Email atau kata sandi salah. Silakan coba lagi.");
       }
 
-      // Handle remember me
+      // Handle remember me & session persistence
       if (typeof window !== "undefined") {
         if (rememberMe) {
           localStorage.setItem("openpath_remembered_email", email);
@@ -113,13 +142,15 @@ export function useAuth() {
           localStorage.removeItem("openpath_remembered_email");
         }
 
-        // Store user/session info
         if (data.session) {
           localStorage.setItem("openpath_access_token", data.session.access_token);
         }
         if (data.user) {
           localStorage.setItem("openpath_user", JSON.stringify(data.user));
           setCurrentUser(data.user);
+        }
+        if (data.expiresAt) {
+          localStorage.setItem("openpath_session_expires", String(data.expiresAt));
         }
       }
 
@@ -166,6 +197,6 @@ export function useAuth() {
     fieldErrors,
     currentUser,
     handleLogin,
-    handleLogout,
+    handleLogout: () => handleLogout(false),
   };
 }
