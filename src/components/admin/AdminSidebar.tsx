@@ -75,7 +75,7 @@ export default function AdminSidebar({
                   />
                 </div>
                 <span
-                  className="text-white text-[18px] font-bold tracking-tight"
+                  className="text-white text-[16px] font-bold tracking-tight"
                   style={{ fontFamily: "var(--font-Sora), Sora, sans-serif" }}
                 >
                   Openpath<span className="text-[#F2C94C]">.id</span>
@@ -87,9 +87,9 @@ export default function AdminSidebar({
                 type="button"
                 onClick={onToggle}
                 aria-label="Tutup sidebar"
-                className="w-[36px] h-[36px] rounded-[10px] bg-[#F2C94C] hover:bg-[#e2b93f] active:scale-95 transition-all flex items-center justify-center text-[#14251F] shadow-md cursor-pointer shrink-0"
+                className="w-[36px] h-[36px] p-2 rounded-[10px] bg-[#F2C94C] hover:bg-[#e2b93f] active:scale-95 transition-all flex items-center justify-center text-[#14251F] shadow-md cursor-pointer shrink-0"
               >
-                <ChevronsRight className="w-5 h-5 stroke-[2.5]" />
+                <ChevronsRight className="w-4 h-4 stroke-[2.5]" />
               </button>
             </div>
           ) : (
@@ -153,10 +153,7 @@ export default function AdminSidebar({
                   >
                     <Icon className="w-5 h-5 shrink-0" />
                     {isOpen && (
-                      <span
-                        className="text-[15px] font-semibold leading-none"
-                        style={{ fontFamily: "var(--font-Inter), Inter, sans-serif" }}
-                      >
+                      <span className="text-[18px] font-semibold leading-none font-Sora">
                         {item.label}
                       </span>
                     )}
