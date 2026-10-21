@@ -4,35 +4,22 @@ import { ApplicantStory } from "@/types/story";
 
 export const getRelatedStories = cache(
   async (programId?: string, limit: number = 2): Promise<ApplicantStory[]> => {
-    if (!supabase) return [];
+    if (!supabase || !programId) return [];
 
     try {
-      let query = supabase
+      const { data, error } = await supabase
         .from("applicant_stories")
         .select("*")
         .eq("is_published", true)
+        .eq("program_id", programId)
         .order("created_at", { ascending: false })
         .limit(limit);
-
-      if (programId) {
-        query = query.eq("program_id", programId);
-      }
-
-      const { data, error } = await query;
 
       if (!error && data && data.length > 0) {
         return data as ApplicantStory[];
       }
 
-      // Fallback to any published stories if no specific story for this program
-      const { data: generalData } = await supabase
-        .from("applicant_stories")
-        .select("*")
-        .eq("is_published", true)
-        .order("created_at", { ascending: false })
-        .limit(limit);
-
-      return (generalData as ApplicantStory[]) || [];
+      return [];
     } catch (err) {
       console.error("Error fetching related stories from Supabase:", err);
       return [];

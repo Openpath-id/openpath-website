@@ -351,208 +351,201 @@ export default function ProgramDetailClient({
         </div>
 
         {/* ============================================================== */}
-        {/* CARD 4: Cerita Aplikan Terkait                                 */}
+        {/* CARD 4: Cerita Aplikan Terkait (Hanya tampil jika ada cerita) */}
         {/* ============================================================== */}
-        <section className="w-full rounded-[20px] xl:rounded-[24px] p-6 xl:p-8 bg-[#0F4936] text-white shadow-md flex flex-col gap-6">
-          {/* Header Section */}
-          <div className="flex flex-col gap-1">
-            <Typography
-              as="h2"
-              font="Sora"
-              weight="bold"
-              className="text-[20px] md:text-[24px] font-bold text-white leading-tight"
-            >
-              Cerita Aplikan Terkait
-            </Typography>
-            <p className="font-Inter text-[12px] md:text-[14px] text-white/80">
-              Pelajari strategi nyata dari para aplikan yang telah berhasil lolos seleksi beasiswa
-              ini
-            </p>
-          </div>
-
-          {stories.length === 0 ? (
-            <div className="bg-white/10 rounded-[16px] p-6 text-center text-white/80 font-Inter text-[14px]">
-              Belum ada cerita aplikan yang ditautkan untuk program ini.
+        {stories && stories.length > 0 && (
+          <section className="w-full rounded-[20px] xl:rounded-[24px] p-6 xl:p-8 bg-[#0F4936] text-white shadow-md flex flex-col gap-6">
+            {/* Header Section */}
+            <div className="flex flex-col gap-1">
+              <Typography
+                as="h2"
+                font="Sora"
+                weight="bold"
+                className="text-[20px] md:text-[24px] font-bold text-white leading-tight"
+              >
+                Cerita Aplikan Terkait
+              </Typography>
+              <p className="font-Inter text-[12px] md:text-[14px] text-white/80">
+                Pelajari strategi nyata dari para aplikan yang telah berhasil lolos seleksi beasiswa
+                ini
+              </p>
             </div>
-          ) : (
-            <>
-              {/* Desktop View: Side by Side (2 columns) */}
-              <div className="hidden xl:grid grid-cols-2 gap-6">
-                {stories.slice(0, 2).map((story) => (
-                  <div
-                    key={story.id}
-                    className="bg-white rounded-[16px] p-6 text-[#17221F] flex flex-col justify-between gap-4 shadow-sm"
-                  >
-                    <div className="flex flex-col gap-3">
-                      {/* Badge */}
-                      <div className="self-start px-2.5 py-0.5 rounded-[19px] border border-[#176B5B] bg-[#DCEFE7]">
-                        <span className="font-Inter text-[11px] font-medium text-[#176B5B]">
-                          {story.badge}
+            {/* Desktop View: Side by Side (2 columns) */}
+            <div className="hidden xl:grid grid-cols-2 gap-6">
+              {stories.slice(0, 2).map((story) => (
+                <div
+                  key={story.id}
+                  className="bg-white rounded-[16px] p-6 text-[#17221F] flex flex-col justify-between gap-4 shadow-sm"
+                >
+                  <div className="flex flex-col gap-3">
+                    {/* Badge */}
+                    <div className="self-start px-2.5 py-0.5 rounded-[19px] border border-[#176B5B] bg-[#DCEFE7]">
+                      <span className="font-Inter text-[11px] font-medium text-[#176B5B]">
+                        {story.badge}
+                      </span>
+                    </div>
+
+                    {/* Author Row */}
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-[#DCEFE7] text-[#176B5B] flex items-center justify-center shrink-0">
+                        <User className="w-5 h-5 text-[#176B5B]" />
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="font-Sora font-bold text-[14px] text-[#17221F]">
+                          {story.author_name || story.authorName}
+                        </span>
+                        <span className="font-Inter text-[12px] text-neutral-500">
+                          {story.author_role || story.authorRole}
                         </span>
                       </div>
+                    </div>
 
-                      {/* Author Row */}
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-[#DCEFE7] text-[#176B5B] flex items-center justify-center shrink-0">
-                          <User className="w-5 h-5 text-[#176B5B]" />
-                        </div>
-                        <div className="flex flex-col">
-                          <span className="font-Sora font-bold text-[14px] text-[#17221F]">
-                            {story.authorName}
-                          </span>
-                          <span className="font-Inter text-[12px] text-neutral-500">
-                            {story.authorRole}
-                          </span>
-                        </div>
+                    <div className="border-b border-neutral-200 my-1" />
+
+                    {/* Story Title & Excerpt */}
+                    <Typography
+                      as="h3"
+                      font="Sora"
+                      weight="bold"
+                      className="text-[15px] font-bold text-[#17221F] leading-snug"
+                    >
+                      {story.title}
+                    </Typography>
+
+                    <p className="font-Inter text-[12px] text-neutral-600 leading-relaxed">
+                      {story.excerpt}
+                    </p>
+                  </div>
+
+                  <Link
+                    href={`/cerita-aplikan/${story.slug || story.id}`}
+                    className="self-start inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#176B5B] hover:bg-[#125548] text-white text-[12px] font-semibold transition-colors mt-2"
+                  >
+                    <span>Lihat detail</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
+              ))}
+            </div>
+
+            {/* Mobile / Tablet View: Interactive Carousel Card */}
+            {currentMobileStory && (
+              <div className="flex xl:hidden flex-col gap-4">
+                <div className="bg-white rounded-[16px] p-5 md:p-6 text-[#17221F] flex flex-col justify-between gap-4 shadow-sm">
+                  <div className="flex flex-col gap-3">
+                    {/* Badge */}
+                    <div className="self-start px-2.5 py-0.5 rounded-[19px] border border-[#176B5B] bg-[#DCEFE7]">
+                      <span className="font-Inter text-[11px] font-medium text-[#176B5B]">
+                        {currentMobileStory.badge}
+                      </span>
+                    </div>
+
+                    {/* Author Row */}
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-[#DCEFE7] text-[#176B5B] flex items-center justify-center shrink-0">
+                        <User className="w-5 h-5 text-[#176B5B]" />
                       </div>
+                      <div className="flex flex-col">
+                        <span className="font-Sora font-bold text-[14px] text-[#17221F]">
+                          {currentMobileStory.author_name || currentMobileStory.authorName}
+                        </span>
+                        <span className="font-Inter text-[12px] text-neutral-500">
+                          {currentMobileStory.author_role || currentMobileStory.authorRole}
+                        </span>
+                      </div>
+                    </div>
 
-                      <div className="border-b border-neutral-200 my-1" />
+                    <div className="border-b border-neutral-200 my-1" />
 
-                      {/* Story Title & Excerpt */}
+                    {/* Title with floating overlay carousel arrows in front */}
+                    <div className="relative flex items-center">
+                      <button
+                        type="button"
+                        onClick={prevStory}
+                        className="absolute -left-1 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-neutral-400/80 hover:bg-neutral-500 text-white flex items-center justify-center cursor-pointer shadow-sm z-10 transition-colors"
+                        aria-label="Story sebelumnya"
+                      >
+                        <ChevronLeft className="w-4 h-4 text-white" />
+                      </button>
+
                       <Typography
                         as="h3"
                         font="Sora"
                         weight="bold"
-                        className="text-[15px] font-bold text-[#17221F] leading-snug"
+                        className="text-[15px] font-bold text-[#17221F] leading-snug w-full text-left"
                       >
-                        {story.title}
+                        {currentMobileStory.title}
                       </Typography>
 
-                      <p className="font-Inter text-[12px] text-neutral-600 leading-relaxed">
-                        {story.excerpt}
-                      </p>
+                      <button
+                        type="button"
+                        onClick={nextStory}
+                        className="absolute -right-1 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-neutral-400/80 hover:bg-neutral-500 text-white flex items-center justify-center cursor-pointer shadow-sm z-10 transition-colors"
+                        aria-label="Story berikutnya"
+                      >
+                        <ChevronRight className="w-4 h-4 text-white" />
+                      </button>
                     </div>
 
-                    <Link
-                      href={`/cerita-aplikan/${story.slug || story.id}`}
-                      className="self-start inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#176B5B] hover:bg-[#125548] text-white text-[12px] font-semibold transition-colors mt-2"
-                    >
-                      <span>Lihat detail</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </Link>
+                    <p className="font-Inter text-[12px] text-neutral-600 leading-relaxed text-justify">
+                      {currentMobileStory.excerpt}
+                    </p>
                   </div>
-                ))}
+
+                  <Link
+                    href={`/cerita-aplikan/${currentMobileStory.slug || currentMobileStory.id}`}
+                    className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-[#176B5B] hover:bg-[#125548] text-white text-[13px] font-semibold transition-colors mt-2"
+                  >
+                    <span>Lihat detail</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
+
+                {/* Dots Indicator */}
+                <div className="flex items-center justify-center gap-1.5 py-1">
+                  {stories.map((_, idx) => (
+                    <button
+                      key={idx}
+                      type="button"
+                      onClick={() => goToStory(idx)}
+                      className={`h-2 rounded-full transition-all cursor-pointer ${
+                        currentStoryIndex === idx
+                          ? "w-8 bg-[#F2C94C]"
+                          : "w-2 bg-white/60 hover:bg-white"
+                      }`}
+                      aria-label={`Pilih cerita ${idx + 1}`}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Bottom Banner: Ingin tahu cerita aplikan yang lainnya? */}
+            <div className="bg-white rounded-[16px] p-5 md:p-6 text-[#17221F] flex flex-col md:flex-row md:items-center md:justify-between gap-4 shadow-sm">
+              <div className="flex flex-col gap-1 max-w-[620px]">
+                <Typography
+                  as="h3"
+                  font="Sora"
+                  weight="bold"
+                  className="text-[15px] md:text-[16px] font-bold text-[#17221F]"
+                >
+                  Ingin tahu cerita aplikan yang lainnya?
+                </Typography>
+                <p className="font-Inter text-[12px] text-[#4B5563] leading-relaxed">
+                  Kunjungi halaman Cerita Aplikan untuk melihat tips dan pengalaman mereka selama
+                  mendaftar beasiswa atau pendanaan sertifikasi
+                </p>
               </div>
 
-              {/* Mobile / Tablet View: Interactive Carousel Card */}
-              {currentMobileStory && (
-                <div className="flex xl:hidden flex-col gap-4">
-                  <div className="bg-white rounded-[16px] p-5 md:p-6 text-[#17221F] flex flex-col justify-between gap-4 shadow-sm">
-                    <div className="flex flex-col gap-3">
-                      {/* Badge */}
-                      <div className="self-start px-2.5 py-0.5 rounded-[19px] border border-[#176B5B] bg-[#DCEFE7]">
-                        <span className="font-Inter text-[11px] font-medium text-[#176B5B]">
-                          {currentMobileStory.badge}
-                        </span>
-                      </div>
-
-                      {/* Author Row */}
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-[#DCEFE7] text-[#176B5B] flex items-center justify-center shrink-0">
-                          <User className="w-5 h-5 text-[#176B5B]" />
-                        </div>
-                        <div className="flex flex-col">
-                          <span className="font-Sora font-bold text-[14px] text-[#17221F]">
-                            {currentMobileStory.authorName}
-                          </span>
-                          <span className="font-Inter text-[12px] text-neutral-500">
-                            {currentMobileStory.authorRole}
-                          </span>
-                        </div>
-                      </div>
-
-                      <div className="border-b border-neutral-200 my-1" />
-
-                      {/* Title with floating overlay carousel arrows in front */}
-                      <div className="relative flex items-center">
-                        <button
-                          type="button"
-                          onClick={prevStory}
-                          className="absolute -left-1 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-neutral-400/80 hover:bg-neutral-500 text-white flex items-center justify-center cursor-pointer shadow-sm z-10 transition-colors"
-                          aria-label="Story sebelumnya"
-                        >
-                          <ChevronLeft className="w-4 h-4 text-white" />
-                        </button>
-
-                        <Typography
-                          as="h3"
-                          font="Sora"
-                          weight="bold"
-                          className="text-[15px] font-bold text-[#17221F] leading-snug w-full text-left"
-                        >
-                          {currentMobileStory.title}
-                        </Typography>
-
-                        <button
-                          type="button"
-                          onClick={nextStory}
-                          className="absolute -right-1 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-neutral-400/80 hover:bg-neutral-500 text-white flex items-center justify-center cursor-pointer shadow-sm z-10 transition-colors"
-                          aria-label="Story berikutnya"
-                        >
-                          <ChevronRight className="w-4 h-4 text-white" />
-                        </button>
-                      </div>
-
-                      <p className="font-Inter text-[12px] text-neutral-600 leading-relaxed text-justify">
-                        {currentMobileStory.excerpt}
-                      </p>
-                    </div>
-
-                    <Link
-                      href={`/cerita-aplikan/${currentMobileStory.slug || currentMobileStory.id}`}
-                      className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-[#176B5B] hover:bg-[#125548] text-white text-[13px] font-semibold transition-colors mt-2"
-                    >
-                      <span>Lihat detail</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </Link>
-                  </div>
-
-                  {/* Dots Indicator */}
-                  <div className="flex items-center justify-center gap-1.5 py-1">
-                    {stories.map((_, idx) => (
-                      <button
-                        key={idx}
-                        type="button"
-                        onClick={() => goToStory(idx)}
-                        className={`h-2 rounded-full transition-all cursor-pointer ${
-                          currentStoryIndex === idx
-                            ? "w-8 bg-[#F2C94C]"
-                            : "w-2 bg-white/60 hover:bg-white"
-                        }`}
-                        aria-label={`Pilih cerita ${idx + 1}`}
-                      />
-                    ))}
-                  </div>
-                </div>
-              )}
-            </>
-          )}
-
-          {/* Bottom Banner: Ingin tahu cerita aplikan yang lainnya? */}
-          <div className="bg-white rounded-[16px] p-5 md:p-6 text-[#17221F] flex flex-col md:flex-row md:items-center md:justify-between gap-4 shadow-sm">
-            <div className="flex flex-col gap-1 max-w-[620px]">
-              <Typography
-                as="h3"
-                font="Sora"
-                weight="bold"
-                className="text-[15px] md:text-[16px] font-bold text-[#17221F]"
+              <Link
+                href="/cerita-aplikan"
+                className="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-[#176B5B] hover:bg-[#125548] text-white font-Inter text-[13px] md:text-[14px] font-semibold transition-colors whitespace-nowrap shadow-sm"
               >
-                Ingin tahu cerita aplikan yang lainnya?
-              </Typography>
-              <p className="font-Inter text-[12px] text-[#4B5563] leading-relaxed">
-                Kunjungi halaman Cerita Aplikan untuk melihat tips dan pengalaman mereka selama
-                mendaftar beasiswa atau pendanaan sertifikasi
-              </p>
+                Kunjungi Sekarang!
+              </Link>
             </div>
-
-            <Link
-              href="/cerita-aplikan"
-              className="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-[#176B5B] hover:bg-[#125548] text-white font-Inter text-[13px] md:text-[14px] font-semibold transition-colors whitespace-nowrap shadow-sm"
-            >
-              Kunjungi Sekarang!
-            </Link>
-          </div>
-        </section>
+          </section>
+        )}
       </div>
     </main>
   );
