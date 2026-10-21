@@ -74,10 +74,7 @@ export default function AdminSidebar({
                     priority
                   />
                 </div>
-                <span
-                  className="text-white text-[16px] font-bold tracking-tight"
-                  style={{ fontFamily: "var(--font-Sora), Sora, sans-serif" }}
-                >
+                <span className="text-white text-[16px] font-bold tracking-tight font-Sora">
                   Openpath<span className="text-[#F2C94C]">.id</span>
                 </span>
               </Link>
@@ -127,10 +124,7 @@ export default function AdminSidebar({
           {/* Nav Items Section */}
           <div className="w-full flex flex-col">
             {isOpen && (
-              <p
-                className="text-white/80 text-[12px] font-semibold uppercase tracking-wider px-2 mb-3 select-none"
-                style={{ fontFamily: "var(--font-Inter), Inter, sans-serif" }}
-              >
+              <p className="text-white/80 text-[12px] font-semibold uppercase tracking-wider px-2 mb-3 select-none font-Inter">
                 Overview
               </p>
             )}
@@ -186,16 +180,10 @@ export default function AdminSidebar({
                       <User className="w-4 h-4 fill-white" />
                     </div>
                     <div className="flex flex-col min-w-0">
-                      <span
-                        className="text-[13px] font-bold text-[#17221F] leading-tight truncate"
-                        style={{ fontFamily: "var(--font-Inter), Inter, sans-serif" }}
-                      >
+                      <span className="text-[13px] font-bold text-[#17221F] leading-tight truncate font-Inter">
                         {adminName}
                       </span>
-                      <span
-                        className="text-[11px] font-normal text-[#2C3833] leading-tight truncate"
-                        style={{ fontFamily: "var(--font-Inter), Inter, sans-serif" }}
-                      >
+                      <span className="text-[11px] font-normal text-[#2C3833] leading-tight truncate font-Inter">
                         {adminEmail}
                       </span>
                     </div>
@@ -233,12 +221,7 @@ export default function AdminSidebar({
                 className="flex items-center gap-2.5 px-3 py-2.5 text-sm text-red-600 hover:bg-red-50 focus:bg-red-50 focus:text-red-700 rounded-[8px] cursor-pointer transition-colors mt-1"
               >
                 <LogOut className="w-4 h-4 text-red-600 shrink-0" />
-                <span
-                  className="font-semibold text-[13px]"
-                  style={{ fontFamily: "var(--font-Inter), Inter, sans-serif" }}
-                >
-                  Logout
-                </span>
+                <span className="font-semibold text-[13px] font-Inter">Logout</span>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -276,10 +259,7 @@ export default function AdminSidebar({
                   priority
                 />
               </div>
-              <span
-                className="text-white text-[18px] font-bold tracking-tight"
-                style={{ fontFamily: "var(--font-Sora), Sora, sans-serif" }}
-              >
+              <span className="text-white text-[18px] font-bold tracking-tight font-Sora">
                 Openpath<span className="text-[#F2C94C]">.id</span>
               </span>
             </Link>
@@ -299,10 +279,7 @@ export default function AdminSidebar({
 
           {/* Navigation */}
           <div className="w-full flex flex-col">
-            <p
-              className="text-white/80 text-[12px] font-semibold uppercase tracking-wider px-2 mb-3"
-              style={{ fontFamily: "var(--font-Inter), Inter, sans-serif" }}
-            >
+            <p className="text-white/80 text-[12px] font-semibold uppercase tracking-wider px-2 mb-3 font-Inter">
               Overview
             </p>
 
@@ -321,10 +298,7 @@ export default function AdminSidebar({
                     }`}
                   >
                     <Icon className="w-5 h-5 shrink-0" />
-                    <span
-                      className="text-[15px] font-semibold leading-none"
-                      style={{ fontFamily: "var(--font-Inter), Inter, sans-serif" }}
-                    >
+                    <span className="text-[15px] font-semibold leading-none font-Inter">
                       {item.label}
                     </span>
                   </Link>
@@ -349,16 +323,10 @@ export default function AdminSidebar({
                     <User className="w-4 h-4 fill-white" />
                   </div>
                   <div className="flex flex-col min-w-0">
-                    <span
-                      className="text-[13px] font-bold text-[#17221F] leading-tight truncate"
-                      style={{ fontFamily: "var(--font-Inter), Inter, sans-serif" }}
-                    >
+                    <span className="text-[13px] font-bold text-[#17221F] leading-tight truncate font-Inter">
                       {adminName}
                     </span>
-                    <span
-                      className="text-[11px] font-normal text-[#2C3833] leading-tight truncate"
-                      style={{ fontFamily: "var(--font-Inter), Inter, sans-serif" }}
-                    >
+                    <span className="text-[11px] font-normal text-[#2C3833] leading-tight truncate font-Inter">
                       {adminEmail}
                     </span>
                   </div>
@@ -387,12 +355,7 @@ export default function AdminSidebar({
                 className="flex items-center gap-2.5 px-3 py-2.5 text-sm text-red-600 hover:bg-red-50 focus:bg-red-50 focus:text-red-700 rounded-[8px] cursor-pointer transition-colors mt-1"
               >
                 <LogOut className="w-4 h-4 text-red-600 shrink-0" />
-                <span
-                  className="font-semibold text-[13px]"
-                  style={{ fontFamily: "var(--font-Inter), Inter, sans-serif" }}
-                >
-                  Logout
-                </span>
+                <span className="font-semibold text-[13px] font-Inter">Logout</span>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

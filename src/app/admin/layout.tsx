@@ -51,10 +51,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               priority
             />
           </div>
-          <span
-            className="text-[17px] font-bold tracking-tight text-white"
-            style={{ fontFamily: "var(--font-Sora), Sora, sans-serif" }}
-          >
+          <span className="text-[17px] font-bold tracking-tight text-white font-Sora">
             Openpath<span className="text-[#F2C94C]">.id</span>
           </span>
         </Link>

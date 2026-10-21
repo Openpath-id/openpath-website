@@ -78,10 +78,9 @@ export default function AdminListingPage() {
   return (
     <>
       <div
-        className={`w-full flex flex-col pt-6 px-4 pb-8 lg:pt-[94px] lg:pr-[61px] lg:pb-[36px] lg:pl-[48px] transition-opacity duration-300 ${
+        className={`w-full flex flex-col pt-6 px-4 pb-8 lg:pt-[94px] lg:pr-[61px] lg:pb-[36px] lg:pl-[48px] font-Inter transition-opacity duration-300 ${
           isDrawerOpen ? "opacity-35 pointer-events-none select-none" : "opacity-100"
         }`}
-        style={{ fontFamily: "var(--font-Inter), Inter, sans-serif" }}
       >
         {/* 1. Header (Title & Subtitle) */}
         <AdminHeader />

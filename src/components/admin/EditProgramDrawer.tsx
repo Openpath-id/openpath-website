@@ -68,10 +68,7 @@ function EditProgramForm({ program, onClose, onSuccess }: EditProgramFormProps) 
       {/* Header */}
       <div className="flex items-start justify-between pb-6 border-b border-neutral-100">
         <div>
-          <h1
-            className="text-[22px] lg:text-[24px] font-bold text-[#14251F] tracking-tight leading-tight"
-            style={{ fontFamily: "var(--font-Sora), Sora, sans-serif" }}
-          >
+          <h1 className="text-[22px] lg:text-[24px] font-bold text-[#14251F] tracking-tight leading-tight font-Sora">
             Edit Informasi Peluang
           </h1>
           <p className="text-[13px] lg:text-[14px] text-[#526058] mt-1.5 leading-snug">
@@ -98,12 +95,7 @@ function EditProgramForm({ program, onClose, onSuccess }: EditProgramFormProps) 
             <div className="w-[26px] h-[26px] rounded-[6px] bg-[#176B5B] text-white font-bold text-[13px] flex items-center justify-center shrink-0">
               1
             </div>
-            <h2
-              className="text-[17px] font-bold text-[#14251F]"
-              style={{ fontFamily: "var(--font-Sora), Sora, sans-serif" }}
-            >
-              Informasi Utama
-            </h2>
+            <h2 className="text-[17px] font-bold text-[#14251F] font-Sora">Informasi Utama</h2>
           </div>
 
           {/* Kategori Peluang */}
@@ -228,12 +220,7 @@ function EditProgramForm({ program, onClose, onSuccess }: EditProgramFormProps) 
             <div className="w-[26px] h-[26px] rounded-[6px] bg-[#176B5B] text-white font-bold text-[13px] flex items-center justify-center shrink-0">
               2
             </div>
-            <h2
-              className="text-[17px] font-bold text-[#14251F]"
-              style={{ fontFamily: "var(--font-Sora), Sora, sans-serif" }}
-            >
-              Klasifikasi Cepat
-            </h2>
+            <h2 className="text-[17px] font-bold text-[#14251F] font-Sora">Klasifikasi Cepat</h2>
           </div>
 
           {/* Jenjang/Sasaran Pills */}
@@ -320,12 +307,7 @@ function EditProgramForm({ program, onClose, onSuccess }: EditProgramFormProps) 
             <div className="w-[26px] h-[26px] rounded-[6px] bg-[#176B5B] text-white font-bold text-[13px] flex items-center justify-center shrink-0">
               3
             </div>
-            <h2
-              className="text-[17px] font-bold text-[#14251F]"
-              style={{ fontFamily: "var(--font-Sora), Sora, sans-serif" }}
-            >
-              Ringkasan Program
-            </h2>
+            <h2 className="text-[17px] font-bold text-[#14251F] font-Sora">Ringkasan Program</h2>
           </div>
 
           <div className="flex flex-col gap-1.5">
@@ -350,12 +332,7 @@ function EditProgramForm({ program, onClose, onSuccess }: EditProgramFormProps) 
             <div className="w-[26px] h-[26px] rounded-[6px] bg-[#176B5B] text-white font-bold text-[13px] flex items-center justify-center shrink-0">
               4
             </div>
-            <h2
-              className="text-[17px] font-bold text-[#14251F]"
-              style={{ fontFamily: "var(--font-Sora), Sora, sans-serif" }}
-            >
-              Syarat Kelayakan
-            </h2>
+            <h2 className="text-[17px] font-bold text-[#14251F] font-Sora">Syarat Kelayakan</h2>
           </div>
 
           <div className="flex flex-col gap-2.5">
@@ -419,12 +396,7 @@ function EditProgramForm({ program, onClose, onSuccess }: EditProgramFormProps) 
             <div className="w-[26px] h-[26px] rounded-[6px] bg-[#176B5B] text-white font-bold text-[13px] flex items-center justify-center shrink-0">
               5
             </div>
-            <h2
-              className="text-[17px] font-bold text-[#14251F]"
-              style={{ fontFamily: "var(--font-Sora), Sora, sans-serif" }}
-            >
-              Komponen Benefit
-            </h2>
+            <h2 className="text-[17px] font-bold text-[#14251F] font-Sora">Komponen Benefit</h2>
           </div>
 
           {/* Ringkasan Benefit */}
@@ -558,8 +530,7 @@ export default function EditProgramDrawer({
       {/* Slide-over Edit Drawer (Width ~500px on desktop) */}
       <aside
         aria-label="Panel Edit Informasi Peluang"
-        className="fixed top-0 bottom-0 right-0 z-50 w-full sm:w-[500px] lg:w-[500px] bg-white shadow-[-8px_0_30px_rgba(0,0,0,0.12)] flex flex-col h-full overflow-hidden animate-in slide-in-from-right duration-300"
-        style={{ fontFamily: "var(--font-Inter), Inter, sans-serif" }}
+        className="fixed top-0 bottom-0 right-0 z-50 w-full sm:w-[500px] lg:w-[500px] bg-white shadow-[-8px_0_30px_rgba(0,0,0,0.12)] flex flex-col h-full overflow-hidden animate-in slide-in-from-right duration-300 font-Inter"
       >
         <EditProgramForm
           key={program.id}

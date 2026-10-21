@@ -47,10 +47,7 @@ export default function AdminStatCards({ counts }: AdminStatCardsProps) {
               <Icon className="w-8 h-8 text-white stroke-[1.8] shrink-0" />
             </div>
             <div className="mt-4">
-              <span
-                className="text-[44px] font-bold leading-none text-[#F2C94C]"
-                style={{ fontFamily: "var(--font-Sora), Sora, sans-serif" }}
-              >
+              <span className="text-[44px] font-bold leading-none text-[#F2C94C] font-Sora">
                 {card.count}
               </span>
             </div>

@@ -11,18 +11,12 @@ export default function LoginPage() {
       {/* ========================================================================= */}
       <div className="flex flex-col items-center justify-center min-h-screen px-[24px] py-[100px] xl:hidden">
         {/* Title */}
-        <h1
-          className="text-center text-[24px] font-bold leading-normal text-[#17221F]"
-          style={{ fontFamily: "var(--font-Sora), Sora, sans-serif" }}
-        >
+        <h1 className="text-center text-[24px] font-bold leading-normal text-[#17221F] font-Sora">
           Mulai Masuk
         </h1>
 
         {/* Subtitle (gap ke bawahnya 8px) */}
-        <p
-          className="mt-[8px] text-center text-[14px] font-normal leading-relaxed text-[#17221F] max-w-[327px]"
-          style={{ fontFamily: "var(--font-Inter), Inter, sans-serif" }}
-        >
+        <p className="mt-[8px] text-center text-[14px] font-normal leading-relaxed text-[#17221F] max-w-[327px] font-Inter">
           Selamat datang kembali. Masuk untuk melanjutkan pencarian beasiswa dan pendanaan
           sertifikasimu
         </p>
@@ -89,18 +83,12 @@ export default function LoginPage() {
           >
             <div className="w-full max-w-[480px]">
               {/* Mulai Masuk */}
-              <h1
-                className="text-left text-[48px] font-bold leading-tight text-[#17221F]"
-                style={{ fontFamily: "var(--font-Sora), Sora, sans-serif" }}
-              >
+              <h1 className="text-left text-[48px] font-bold leading-tight text-[#17221F] font-Sora">
                 Mulai Masuk
               </h1>
 
               {/* Subtitle (gap ke bawahnya 16px) */}
-              <p
-                className="mt-[16px] text-left text-[18px] font-normal leading-relaxed text-[#17221F]"
-                style={{ fontFamily: "var(--font-Inter), Inter, sans-serif" }}
-              >
+              <p className="mt-[16px] text-left text-[18px] font-normal leading-relaxed text-[#17221F] font-Inter">
                 Selamat datang kembali. Masuk untuk melanjutkan pencarian beasiswa dan pendanaan
                 sertifikasimu
               </p>
