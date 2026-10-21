@@ -40,10 +40,10 @@ export const SOCIAL_LINKS: SocialLink[] = [
 ];
 
 export const PLATFORM_LINKS: NavItem[] = [
-  { label: "Listing Beasiswa & Sertifikasi", href: "/" },
-  { label: "Deadline Terdekat", href: "/" },
-  { label: "Cerita Aplikan", href: "/" },
-  { label: "Peer Mentoring", href: "/" },
+  { label: "Listing Beasiswa & Sertifikasi", href: "/list" },
+  { label: "Deadline Terdekat", href: "/#neardeadline" },
+  { label: "Cerita Aplikan", href: "/cerita-aplikan" },
+  { label: "Peer Mentoring", href: "/peer-mentoring" },
 ];
 
-export const COMPANY_LINKS: NavItem[] = [{ label: "Tentang Kami", href: "/" }];
+export const COMPANY_LINKS: NavItem[] = [{ label: "Tentang Kami", href: "/#about" }];

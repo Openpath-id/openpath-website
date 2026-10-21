@@ -156,7 +156,11 @@ export default function Hero() {
       </section>
 
       {/* Section 3: Lahir dari PLP YLI 2026 */}
-      <section className="relative w-full bg-gradient-to-r from-[#14251F] to-[#115C3A] from-[-7.78%] to-[100%] overflow-hidden flex flex-col items-center justify-center">
+      <section
+        id="about"
+        className="relative w-full bg-gradient-to-r from-[#14251F] to-[#115C3A] from-[-7.78%] to-[100%] overflow-hidden flex flex-col items-center justify-center scroll-mt-6"
+      >
+        <span id="tentang-kami" className="absolute -top-6" />
         {/* Desktop Layout (lg+) */}
         <div className="hidden lg:flex w-full px-12 xl:px-[90px] py-16 xl:py-[81px] items-center justify-center z-10">
           <div className="w-full bg-[#F7F7F2] rounded-[24px] px-8 xl:px-[40px] py-6 xl:py-[32px] flex items-center gap-6 shadow-xl">
