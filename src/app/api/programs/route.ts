@@ -171,3 +171,83 @@ export async function GET(request: NextRequest) {
     );
   }
 }
+
+export async function POST(request: NextRequest) {
+  if (!supabase) {
+    return NextResponse.json(
+      { error: "Koneksi Supabase tidak dikonfigurasi pada server" },
+      { status: 500 },
+    );
+  }
+
+  try {
+    const body = await request.json();
+
+    const {
+      type,
+      name,
+      organizer,
+      is_verified,
+      education_levels,
+      destination_scope,
+      deadline_date,
+      schedule_notes,
+      eligibility_summary,
+      funding_coverage,
+    } = body;
+
+    if (!name || !type || !organizer) {
+      return NextResponse.json(
+        { error: "Nama, kategori, dan penyelenggara wajib diisi" },
+        { status: 400 },
+      );
+    }
+
+    // Buat slug yang unik dan URL-friendly dari nama program
+    const baseSlug = (name as string)
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+    const randomSuffix = Math.random().toString(36).substring(2, 6);
+    const slug = `${baseSlug}-${randomSuffix}`;
+
+    const newRecord = {
+      type,
+      name: (name as string).trim(),
+      slug,
+      organizer: (organizer as string).trim(),
+      is_verified: Boolean(is_verified),
+      education_levels: Array.isArray(education_levels) ? education_levels : [],
+      destination_scope: destination_scope || "Dalam Negeri",
+      deadline_date: deadline_date || null,
+      schedule_notes: schedule_notes ? (schedule_notes as string).trim() : null,
+      eligibility_summary: eligibility_summary ? (eligibility_summary as string).trim() : null,
+      funding_coverage: funding_coverage ? (funding_coverage as string).trim() : null,
+      category: type === "beasiswa" ? "Beasiswa Umum" : "Sertifikasi Profesional",
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    };
+
+    const { data, error } = await supabase.from("programs").insert(newRecord).select().single();
+
+    if (error) {
+      console.error("Supabase program insert error:", error);
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+
+    return NextResponse.json(
+      {
+        success: true,
+        message: "Program berhasil ditambahkan",
+        program: data,
+      },
+      { status: 201 },
+    );
+  } catch (err: unknown) {
+    console.error("Create program API error:", err);
+    return NextResponse.json(
+      { error: err instanceof Error ? err.message : "Terjadi kesalahan internal" },
+      { status: 500 },
+    );
+  }
+}
