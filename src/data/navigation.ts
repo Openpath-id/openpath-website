@@ -19,7 +19,7 @@ export type SocialLink = {
 export const SOCIAL_LINKS: SocialLink[] = [
   {
     name: "Instagram",
-    href: "/",
+    href: "https://www.instagram.com/openpath.id/",
     icon: "/images/footer/brand-instagram.svg",
   },
   {
