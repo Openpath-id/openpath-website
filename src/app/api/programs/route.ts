@@ -70,7 +70,7 @@ export async function GET(request: NextRequest) {
         .order("deadline_date", { ascending: true, nullsFirst: false });
     } else if (sortBy === "furthest") {
       query = query
-        .order("is_deadline_estimated", { ascending: true })
+        .order("next_deadline_est", { ascending: false, nullsFirst: false })
         .order("deadline_date", { ascending: false, nullsFirst: false });
     } else {
       query = query

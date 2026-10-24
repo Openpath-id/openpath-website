@@ -33,7 +33,7 @@ interface CachedProgramListData {
 }
 
 const FILTERS_STORAGE_KEY = "openpath_list_filters";
-const CACHE_STORAGE_PREFIX = "openpath_prog_cache_v2_";
+const CACHE_STORAGE_PREFIX = "openpath_prog_cache_v3_";
 const CACHE_TTL_MS = 1000 * 60 * 15; // 15 menit cache di device
 
 // In-memory cache untuk akses sinkron instan antar navigasi dalam satu session

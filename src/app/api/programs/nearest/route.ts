@@ -16,11 +16,39 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    const { data, error } = await supabase.rpc("get_nearest_programs", {
-      p_type: type === "all" || !type ? null : type,
-      p_limit: limit,
-      p_page: page,
-    });
+    let query = supabase
+      .from("programs")
+      .select(
+        `
+        id,
+        type,
+        name,
+        slug,
+        organizer,
+        deadline_date,
+        deadline_status,
+        next_deadline_est,
+        is_deadline_estimated,
+        funding_coverage,
+        education_levels,
+        is_verified
+      `,
+      )
+      .not("deadline_date", "is", null);
+
+    if (type && type !== "all") {
+      query = query.eq("type", type);
+    }
+
+    query = query
+      .order("is_deadline_estimated", { ascending: true })
+      .order("deadline_date", { ascending: true, nullsFirst: false });
+
+    const from = (page - 1) * limit;
+    const to = from + limit - 1;
+    query = query.range(from, to);
+
+    const { data, error } = await query;
 
     if (error) {
       console.error("Supabase RPC error in API Route:", error);
