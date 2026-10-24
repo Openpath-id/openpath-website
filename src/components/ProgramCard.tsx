@@ -35,6 +35,7 @@ export default function ProgramCard({ program }: ProgramCardProps) {
   // Hitung status badge & format tanggal (hanya jika ada deadline_date)
   const deadlineInfo = getDeadlineBadgeInfo(displayDateRaw);
   const formattedDate = deadlineInfo?.formattedDate || null;
+  const isEstimated = Boolean(program.is_deadline_estimated);
 
   return (
     <div className="w-full bg-white rounded-[24px] p-6 xl:p-8 flex flex-col justify-between shadow-sm border border-neutral-100 hover:shadow-md transition-shadow">
@@ -91,9 +92,38 @@ export default function ProgramCard({ program }: ProgramCardProps) {
           <div className="flex items-center justify-between gap-2">
             <div className="flex items-center gap-2 min-w-0">
               <Calendar className="w-5 h-5 text-[#17221F] shrink-0" />
-              <span className="font-Inter text-[12px] text-[#17221F] leading-none truncate">
-                {formattedDate || "Segera Ditutup"}
-              </span>
+              <div className="flex items-center gap-1.5 min-w-0">
+                <span className="font-Inter text-[12px] text-[#17221F] leading-none truncate">
+                  {formattedDate || "Segera Ditutup"}
+                </span>
+                {formattedDate &&
+                  (isEstimated ? (
+                    <>
+                      {/* Mobile (< sm): Tampilkan bintang '*' saja */}
+                      <span
+                        title="Tanggal estimasi / perkiraan siklus berikutnya"
+                        className="sm:hidden font-Inter font-bold text-[13px] text-[#B45309] leading-none shrink-0 select-none"
+                      >
+                        *
+                      </span>
+                      {/* Desktop (>= sm): Tampilkan badge Estimasi */}
+                      <span
+                        title="Tanggal estimasi / perkiraan siklus berikutnya"
+                        className="hidden sm:inline-flex items-center text-[10px] font-medium text-[#92400E] bg-[#FEF3C7] px-1.5 py-[2px] rounded-md border border-[#FDE68A] shrink-0 select-none"
+                      >
+                        Estimasi
+                      </span>
+                    </>
+                  ) : (
+                    /* Resmi: Hanya tampil di desktop (>= sm), disembunyikan di mobile */
+                    <span
+                      title="Deadline resmi terkonfirmasi"
+                      className="hidden sm:inline-flex items-center text-[10px] font-semibold text-[#166534] bg-[#DCFCE7] px-1.5 py-[2px] rounded-md border border-[#BBF7D0] shrink-0 select-none"
+                    >
+                      Resmi
+                    </span>
+                  ))}
+              </div>
             </div>
 
             {/* Right side tag: hanya tampilkan jika ada deadline date */}

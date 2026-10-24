@@ -202,6 +202,22 @@ export default function ProgramDetailClient({
               <div className="flex items-center gap-2">
                 <Calendar className="w-4 h-4 text-white shrink-0" />
                 <span>{formattedDate}</span>
+                {formattedDate &&
+                  (currentProgram.is_deadline_estimated ? (
+                    <span
+                      title="Tanggal estimasi / perkiraan siklus berikutnya"
+                      className="inline-flex items-center gap-0.5 text-[11px] font-medium text-[#FEF3C7] bg-[#FEF3C7]/20 px-2 py-0.5 rounded-full border border-[#FDE68A]/40"
+                    >
+                      <span>Estimasi</span>
+                    </span>
+                  ) : (
+                    <span
+                      title="Deadline resmi terkonfirmasi"
+                      className="inline-flex items-center text-[11px] font-semibold text-[#DCFCE7] bg-[#DCFCE7]/20 px-2 py-0.5 rounded-full border border-[#BBF7D0]/40"
+                    >
+                      Resmi
+                    </span>
+                  ))}
               </div>
             </div>
 
@@ -222,6 +238,14 @@ export default function ProgramDetailClient({
               <div className="flex items-center gap-2.5">
                 <Calendar className="w-4 h-4 text-white shrink-0" />
                 <span>{formattedDate}</span>
+                {formattedDate && currentProgram.is_deadline_estimated && (
+                  <span
+                    title="Tanggal estimasi / perkiraan siklus berikutnya"
+                    className="font-bold text-[#F2C94C] text-[13px] leading-none select-none"
+                  >
+                    *
+                  </span>
+                )}
               </div>
             </div>
           </div>
@@ -301,9 +325,19 @@ export default function ProgramDetailClient({
                   </div>
                 )}
               </div>
-              <p className="font-Sora text-[26px] md:text-[30px] font-bold text-[#F2C94C] leading-tight">
-                {formattedDate}
-              </p>
+              <div className="flex flex-wrap items-center gap-1.5">
+                <p className="font-Sora text-[26px] md:text-[30px] font-bold text-[#F2C94C] leading-tight">
+                  {formattedDate}
+                  {currentProgram.is_deadline_estimated && (
+                    <span className="text-[#F2C94C] ml-0.5">*</span>
+                  )}
+                </p>
+              </div>
+              {currentProgram.is_deadline_estimated && (
+                <p className="font-Inter text-[11px] text-white/70 italic mt-0.5">
+                  * Tanggal merupakan perkiraan berdasarkan siklus pendaftaran periode sebelumnya.
+                </p>
+              )}
             </div>
 
             {/* White Card: Estimasi Bantuan */}

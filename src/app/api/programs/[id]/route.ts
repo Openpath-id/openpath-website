@@ -42,7 +42,14 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
     if (body.is_verified !== undefined) updateData.is_verified = Boolean(body.is_verified);
     if (body.education_levels !== undefined) updateData.education_levels = body.education_levels;
     if (body.destination_scope !== undefined) updateData.destination_scope = body.destination_scope;
-    if (body.deadline_date !== undefined) updateData.deadline_date = body.deadline_date;
+    if (body.deadline_date !== undefined) {
+      updateData.deadline_date = body.deadline_date;
+      if (body.next_deadline_est !== undefined) {
+        updateData.next_deadline_est = body.next_deadline_est;
+      } else if (body.deadline_date) {
+        updateData.next_deadline_est = body.deadline_date;
+      }
+    }
     if (body.schedule_notes !== undefined) updateData.schedule_notes = body.schedule_notes;
     if (body.eligibility_summary !== undefined)
       updateData.eligibility_summary = body.eligibility_summary;
