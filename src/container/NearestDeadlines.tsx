@@ -61,7 +61,7 @@ export default function NearestDeadlines() {
                 Deadline <span className="text-[#F2C94C]">Terdekat</span>
               </Typography>
               <p className="font-Sora text-white/90 text-[12px] xl:text-[16px] font-normal leading-relaxed">
-                Jangan lewatkan peluang yang ditutup dalam 14 hari ke depan
+                Jangan lewatkan peluang yang paling dekat batas waktunya
               </p>
             </div>
 

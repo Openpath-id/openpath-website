@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
+import { sortProgramsByDeadline } from "@/lib/deadline";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = request.nextUrl;
@@ -63,32 +64,17 @@ export async function GET(request: NextRequest) {
       query = query.eq("is_verified", false);
     }
 
-    // Sorting
-    if (sortBy === "nearest") {
-      query = query
-        .order("is_deadline_estimated", { ascending: true })
-        .order("deadline_date", { ascending: true, nullsFirst: false });
-    } else if (sortBy === "furthest") {
-      query = query
-        .order("next_deadline_est", { ascending: false, nullsFirst: false })
-        .order("deadline_date", { ascending: false, nullsFirst: false });
-    } else {
-      query = query
-        .order("is_deadline_estimated", { ascending: true })
-        .order("deadline_date", { ascending: true, nullsFirst: false });
-    }
-
-    // Pagination Range
-    const from = (page - 1) * limit;
-    const to = from + limit - 1;
-    query = query.range(from, to);
-
     const { data, count, error } = await query;
 
     if (error) {
       console.error("Supabase programs query error:", error);
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
+
+    // Sorting & Pagination (di server, berdasarkan deadline mendatang yang tampil di card)
+    const sorted = sortProgramsByDeadline(data || [], sortBy === "furthest" ? "desc" : "asc");
+    const from = (page - 1) * limit;
+    const pagedPrograms = sorted.slice(from, from + limit);
 
     // 2. Aggregate Counts for Sidebar Badges & Admin Cards
     const today = new Date().toISOString().split("T")[0];
@@ -156,7 +142,7 @@ export async function GET(request: NextRequest) {
     };
 
     return NextResponse.json({
-      programs: data || [],
+      programs: pagedPrograms,
       totalCount: count ?? 0,
       page,
       limit,
