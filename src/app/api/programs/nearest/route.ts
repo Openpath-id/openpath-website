@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
+import { sortProgramsByDeadline } from "@/lib/deadline";
 
 export async function GET(request: NextRequest) {
   // Ambil searchParams di luar try-catch agar sinyal internal prerender Next.js tidak tertangkap sebagai error 500
@@ -40,14 +41,6 @@ export async function GET(request: NextRequest) {
       query = query.eq("type", type);
     }
 
-    query = query
-      .order("is_deadline_estimated", { ascending: true })
-      .order("deadline_date", { ascending: true, nullsFirst: false });
-
-    const from = (page - 1) * limit;
-    const to = from + limit - 1;
-    query = query.range(from, to);
-
     const { data, error } = await query;
 
     if (error) {
@@ -55,7 +48,10 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
-    return NextResponse.json(data || []);
+    const sorted = sortProgramsByDeadline(data || []);
+
+    const from = (page - 1) * limit;
+    return NextResponse.json(sorted.slice(from, from + limit));
   } catch (err: unknown) {
     console.error("API route error:", err);
     return NextResponse.json(
