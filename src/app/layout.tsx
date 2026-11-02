@@ -6,17 +6,26 @@ import { cn } from "@/lib/utils";
 import Navbar from "@/layout/Navbar";
 import Footer from "@/layout/Footer";
 import { Toaster } from "@/components/ui/sonner";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Openpath.id",
-  description:
-    "Platform yang membantu kamu menemukan beasiswa dan sertifikasi untuk melanjutkan pendidikan dan karir impianmu",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: `${SITE_NAME} - Temukan Beasiswa & Pendanaan Sertifikasi`,
+    template: `%s | ${SITE_NAME}`,
+  },
+  description: SITE_DESCRIPTION,
+  openGraph: {
+    siteName: SITE_NAME,
+    locale: "id_ID",
+    type: "website",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
-      lang="en"
+      lang="id"
       data-scroll-behavior="smooth"
       className={cn(Sora.variable, Inter.variable, "scroll-smooth")}
     >
