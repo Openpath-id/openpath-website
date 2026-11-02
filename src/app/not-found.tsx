@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import ErrorPageLayout from "@/components/ErrorPageLayout";
 
 export const metadata: Metadata = {
-  title: "404 - Halaman Tidak Ditemukan | Openpath.id",
+  title: "404 - Halaman Tidak Ditemukan",
   description: "Maaf, halaman yang Anda cari tidak ada atau telah dipindahkan.",
 };
 

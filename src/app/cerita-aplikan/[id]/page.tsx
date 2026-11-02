@@ -18,15 +18,20 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!story) {
     return {
-      title: "Cerita Aplikan Tidak Ditemukan - OpenPath",
+      title: "Cerita Aplikan Tidak Ditemukan",
       description: "Cerita aplikan yang dicari tidak ditemukan.",
     };
   }
 
+  const description =
+    story.excerpt || story.story_overview || "Kisah inspiratif dan strategi aplikan di OpenPath.";
+  const canonical = `/cerita-aplikan/${story.slug || story.id}`;
+
   return {
-    title: `${story.title} - Cerita Aplikan OpenPath`,
-    description:
-      story.excerpt || story.story_overview || "Kisah inspiratif dan strategi aplikan di OpenPath.",
+    title: `${story.title} - Cerita Aplikan`,
+    description,
+    alternates: { canonical },
+    openGraph: { title: story.title, description, url: canonical, type: "article" },
   };
 }
 

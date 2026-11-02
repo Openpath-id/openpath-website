@@ -9,13 +9,32 @@ import ProgramDetailSkeleton from "@/components/program-detail/ProgramDetailSkel
 // Next.js 16 (Cache Components) route segment config to allow dynamic blocking route
 export const instant = false;
 
-export const metadata: Metadata = {
-  title: "Detail Program | OpenPath",
-  description: "Informasi detail pendaftaran beasiswa dan pendanaan sertifikasi di OpenPath.",
-};
-
 interface PageProps {
   params: Promise<{ id: string }>;
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { id } = await params;
+  const program = await getProgramByIdOrSlug(id);
+
+  if (!program) {
+    return {
+      title: "Program Tidak Ditemukan",
+      description: "Program yang dicari tidak ditemukan atau telah dihapus.",
+    };
+  }
+
+  const description =
+    program.eligibility_summary ||
+    `Informasi pendaftaran ${program.name} oleh ${program.organizer}: syarat, deadline, dan tautan resmi.`;
+  const canonical = `/list/${program.slug || program.id}`;
+
+  return {
+    title: `${program.name} - ${program.organizer}`,
+    description,
+    alternates: { canonical },
+    openGraph: { title: program.name, description, url: canonical },
+  };
 }
 
 async function ProgramDetailFetcher({ params }: PageProps) {

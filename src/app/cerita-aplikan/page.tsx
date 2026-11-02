@@ -8,9 +8,10 @@ import { getInitialStories } from "@/lib/stories";
 export const instant = false;
 
 export const metadata: Metadata = {
-  title: "Cerita Aplikan - OpenPath",
+  title: "Cerita Aplikan",
   description:
     "Kumpulan kisah dan strategi nyata dari para aplikan beasiswa dan pendanaan sertifikasi. Temukan inspirasi dan tips praktis sebelum mendaftar.",
+  alternates: { canonical: "/cerita-aplikan" },
 };
 
 async function CeritaAplikanFetcher() {

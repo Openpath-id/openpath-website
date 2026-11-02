@@ -1,7 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import type { Metadata } from "next";
 import Typography from "@/components/Typography";
+
+export const metadata: Metadata = {
+  title: "Peer Mentoring",
+  description:
+    "Peer mentoring OpenPath: belajar langsung dari aplikan yang sudah lolos beasiswa dan pendanaan sertifikasi.",
+  alternates: { canonical: "/peer-mentoring" },
+};
 
 export default function PeerMentoringPage() {
   return (
